@@ -1,0 +1,32 @@
+<nav class="bottom-navbar" [class.with-logout]="isLoggedIn">
+  <div class="nav-item" [class.active]="isActive('home')" (click)="navigateTo('home')">
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </div>
+  <div class="nav-item" [class.active]="isActive('delivery-areas')" (click)="navigateTo('delivery-areas')">
+    <mat-icon>location_on</mat-icon>
+    <span>Delivery</span>
+  </div>
+  <div class="nav-item" [class.active]="isActive('track-order')" (click)="navigateTo('track-order')">
+    <mat-icon>local_shipping</mat-icon>
+    <span>Track</span>
+  </div>
+  <div class="nav-item" [class.active]="isActive('cart')" (click)="navigateTo('cart')">
+    <div class="cart-icon-container">
+      <mat-icon>shopping_cart</mat-icon>
+      <div class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</div>
+    </div>
+    <span>Cart</span>
+  </div>
+  <!-- Show login when not logged in -->
+  <div class="nav-item" [class.active]="isActive('login')" (click)="navigateTo('login')" *ngIf="!isLoggedIn">
+    <mat-icon>account_circle</mat-icon>
+    <span>Login</span>
+  </div>
+
+  <!-- Show profile when logged in -->
+  <div class="nav-item" [class.active]="isActive('profile')" *ngIf="isLoggedIn" (click)="navigateTo('profile')">
+    <mat-icon>person</mat-icon>
+    <span>Profile</span>
+  </div>
+</nav>

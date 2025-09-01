@@ -1,0 +1,270 @@
+.bottom-navbar {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 60px !important;
+  background: var(--card-bg) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: 0 -4px 20px var(--shadow) !important;
+  z-index: 9999 !important;
+  backdrop-filter: blur(20px) !important;
+  display: flex !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+  padding: 0 4px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    color: var(--text);
+    opacity: 0.7;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    border-radius: 8px;
+    margin: 2px 1px;
+    padding: 4px 2px;
+
+    &:hover {
+      color: var(--nav-active);
+      opacity: 1;
+      background: var(--hover);
+      transform: translateY(-1px);
+
+      mat-icon {
+        color: var(--nav-active);
+        transform: scale(1.05);
+      }
+    }
+
+    &.active {
+      color: var(--nav-active);
+      opacity: 1;
+      background: transparent;
+      position: relative;
+
+      // Simple top indicator line
+      &::before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 28px;
+        height: 2px;
+        background: var(--accent-color);
+        border-radius: 1px;
+        box-shadow: 0 0 6px var(--accent-color);
+      }
+
+      mat-icon {
+        color: var(--accent-color);
+        font-weight: 600;
+        transform: scale(1.1);
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+        text-shadow: 0 0 6px var(--accent-color);
+        transition: all 0.3s ease;
+      }
+
+      span {
+        color: var(--accent-color);
+        font-weight: 700;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        letter-spacing: 0.3px;
+      }
+
+      // Simple transition animation
+      transition: all 0.3s ease;
+    }
+
+    &.admin-item {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+      border-radius: 8px;
+      position: relative;
+      overflow: visible;
+
+      &::before {
+        content: '⚡';
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #ffd700;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      &:hover {
+        background: linear-gradient(135deg, #ff5252, #d32f2f);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+      }
+
+      &.active {
+        background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+
+        &::before {
+          background: #4caf50;
+          content: '✓';
+        }
+      }
+
+      mat-icon, span {
+        color: white;
+        font-weight: 600;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    &.logout-item {
+      background: rgba(220, 53, 69, 0.2);
+      color: #ff6b6b;
+
+      &:hover {
+        background: rgba(220, 53, 69, 0.3);
+        color: #ff5252;
+      }
+    }
+
+    mat-icon {
+      font-size: 24px !important;
+      margin-bottom: 2px;
+      height: 24px !important;
+      width: 24px !important;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Material Icons' !important;
+      font-weight: normal !important;
+      transition: all 0.3s ease;
+    }
+
+    span {
+      font-size: 10px;
+      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+      text-align: center;
+    }
+
+    .cart-icon-container {
+      position: relative;
+      display: inline-block;
+
+      .cart-badge {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background-color: #ff3d71;
+        color: white;
+        font-size: 9px;
+        min-width: 14px;
+        height: 14px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        padding: 0 3px;
+        z-index: 1;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+    }
+  }
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+  .bottom-navbar {
+    height: 55px !important;
+    padding: 0 2px !important;
+
+    .nav-item {
+      margin: 2px 1px;
+      padding: 6px 2px;
+
+      mat-icon {
+        font-size: 20px !important;
+        height: 20px !important;
+        width: 20px !important;
+        margin-bottom: 1px;
+      }
+
+      span {
+        font-size: 9px;
+      }
+
+      .cart-icon-container .cart-badge {
+        min-width: 12px;
+        height: 12px;
+        font-size: 8px;
+        top: -4px;
+        right: -6px;
+      }
+    }
+  }
+}
+
+/* Tablet Optimization */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .bottom-navbar {
+    height: 65px !important;
+    padding: 0 8px !important;
+
+    .nav-item {
+      margin: 3px 2px;
+      padding: 8px 4px;
+
+      mat-icon {
+        font-size: 22px !important;
+        height: 22px !important;
+        width: 22px !important;
+        margin-bottom: 2px;
+      }
+
+      span {
+        font-size: 10px;
+      }
+
+      .cart-icon-container .cart-badge {
+        min-width: 16px;
+        height: 16px;
+        font-size: 9px;
+        top: -6px;
+        right: -6px;
+      }
+    }
+  }
+}
+
+/* Show navbar on all devices */
+@media (max-width: 1024px) {
+  .bottom-navbar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+// Smooth hover transitions
+.nav-item:not(.active):hover {
+  transform: translateY(-1px);
+  background: transparent;
+}

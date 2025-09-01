@@ -1,0 +1,43 @@
+/* Quick CSS Test for Theme Variables - Add this temporarily to styles.scss to test */
+
+/* Test if CSS variables are working at all */
+.test-theme-vars {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  border: 2px solid var(--button-bg) !important;
+  padding: 20px !important;
+  margin: 20px !important;
+  border-radius: 8px !important;
+}
+
+/* Specific test for each theme */
+[data-theme="default"] .test-theme-vars::before {
+  content: "DEFAULT THEME ACTIVE - BG: #ffffff" !important;
+  display: block !important;
+  font-weight: bold !important;
+}
+
+[data-theme="dark"] .test-theme-vars::before {
+  content: "DARK THEME ACTIVE - BG: #121212" !important;
+  display: block !important;
+  font-weight: bold !important;
+}
+
+[data-theme="minimal"] .test-theme-vars::before {
+  content: "MINIMAL THEME ACTIVE - BG: #F5F5F5" !important;
+  display: block !important;
+  font-weight: bold !important;
+}
+
+[data-theme="colorful"] .test-theme-vars::before {
+  content: "COLORFUL THEME ACTIVE - BG: gradient" !important;
+  display: block !important;
+  font-weight: bold !important;
+}
+
+/* Force high specificity for testing */
+html[data-theme] body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  transition: all 0.3s ease !important;
+}

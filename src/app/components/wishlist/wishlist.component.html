@@ -1,0 +1,41 @@
+<div class="wishlist-container">
+  <div class="wishlist-header">
+    <h2>Your Wishlist</h2>
+    <button mat-button *ngIf="wishlistItems.length > 0" (click)="clearWishlist()" class="clear-button">
+      <mat-icon>delete_sweep</mat-icon> Clear Wishlist
+    </button>
+  </div>
+  
+  <div class="empty-wishlist" *ngIf="wishlistItems.length === 0">
+    <mat-icon>favorite_border</mat-icon>
+    <p>Your wishlist is empty</p>
+    <button mat-raised-button color="primary" routerLink="/home">Shop Now</button>
+  </div>
+  
+  <div class="wishlist-items" *ngIf="wishlistItems.length > 0">
+    <div class="wishlist-item" *ngFor="let item of wishlistItems">
+      <div class="item-image" (click)="viewProductDetails(item)">
+        <img [src]="item.image" [alt]="item.name">
+        <div class="item-badge" *ngIf="item.badge">{{ item.badge }}</div>
+      </div>
+      
+      <div class="item-details">
+        <h3 (click)="viewProductDetails(item)">{{ item.name }}</h3>
+        <div class="price-section">
+          <span class="current-price">₹{{ item.price }}</span>
+          <span class="original-price" *ngIf="item.originalPrice">₹{{ item.originalPrice }}</span>
+          <span class="discount" *ngIf="item.discount">{{ item.discount }} OFF</span>
+        </div>
+        
+        <div class="item-actions">
+          <button mat-raised-button color="primary" (click)="addToCart(item)">
+            <mat-icon>shopping_cart</mat-icon> Add to Cart
+          </button>
+          <button mat-icon-button class="remove-button" (click)="removeFromWishlist(item)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

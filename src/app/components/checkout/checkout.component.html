@@ -1,0 +1,413 @@
+<app-minimum-order-banner [minimumAmount]="minimumOrderAmount"></app-minimum-order-banner>
+<div class="checkout-container">
+  <div class="checkout-header">
+    <button class="back-button" routerLink="/cart">
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <h1>Checkout</h1>
+  </div>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="proceedToPayment()" class="checkout-form">
+    <!-- Contact Information -->
+    <div class="form-section">
+      <h2>Contact</h2>
+      <div class="form-field phone-input">
+        <div class="country-code" (click)="toggleCountryDropdown()">
+          <img [src]="selectedCountry?.flag" [alt]="selectedCountry?.name + ' flag'">
+          <span>{{ selectedCountry?.dialCode }}</span>
+          <span class="material-icons">keyboard_arrow_down</span>
+
+          <div class="country-dropdown" *ngIf="showCountryDropdown">
+            <div class="country-item" *ngFor="let country of countries" (click)="selectCountry(country); $event.stopPropagation()">
+              <img [src]="country.flag" [alt]="country.name + ' flag'">
+              <span>{{ country.name }}</span>
+              <span class="dial-code">{{ country.dialCode }}</span>
+            </div>
+          </div>
+        </div>
+        <input
+          type="tel"
+          formControlName="phone"
+          placeholder="Mobile Number"
+          maxlength="10"
+        >
+      </div>
+
+      <div class="form-field">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Email Address (optional)"
+        >
+      </div>
+    </div>
+
+    <!-- Delivery Address -->
+    <div class="form-section">
+      <div class="section-header">
+        <h2>Delivery</h2>
+        <div class="address-actions" *ngIf="authService.isAuthenticated()">
+          <button type="button" class="address-btn" (click)="toggleSavedAddresses()" *ngIf="!showSavedAddresses && savedAddresses.length > 0">
+            <mat-icon>location_on</mat-icon>
+            Choose Saved Address
+          </button>
+          <button type="button" class="address-btn" (click)="showNewAddressForm()">
+            <mat-icon>add</mat-icon>
+            Add New Address
+          </button>
+        </div>
+      </div>
+
+      <!-- Saved Addresses List -->
+      <div class="saved-addresses" *ngIf="showSavedAddresses && savedAddresses.length > 0">
+        <h3>Saved Addresses</h3>
+        <div class="address-list">
+          <div class="address-item"
+               *ngFor="let address of savedAddresses"
+               [class.selected]="selectedAddressId === address._id"
+               (click)="selectSavedAddress(address._id)">
+            <div class="address-info">
+              <div class="address-header">
+                <mat-icon class="address-type-icon">{{ getAddressTypeIcon(address.type) }}</mat-icon>
+                <span class="address-type">{{ address.type | titlecase }}</span>
+                <span class="address-name">{{ address.name }}</span>
+              </div>
+              <div class="address-text">{{ formatAddressDisplay(address) }}</div>
+              <div class="address-phone">{{ address.phone }}</div>
+            </div>
+            <div class="address-actions">
+              <button type="button" class="edit-btn" (click)="editAddress(address._id); $event.stopPropagation()">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button type="button" class="delete-btn" (click)="deleteAddress(address._id); $event.stopPropagation()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="cancel-btn" (click)="showSavedAddresses = false">Cancel</button>
+      </div>
+
+      <!-- Address Form -->
+      <div class="address-form" [class.hidden]="showSavedAddresses && !showAddressForm">
+        <!-- Address Type Selection -->
+        <div class="address-type-selection" *ngIf="showAddressForm">
+          <h4>Address Type</h4>
+          <div class="type-buttons">
+            <button type="button"
+                    class="type-btn"
+                    [class.active]="currentAddressType === 'home'"
+                    (click)="setAddressType('home')">
+              <mat-icon>home</mat-icon>
+              Home
+            </button>
+            <button type="button"
+                    class="type-btn"
+                    [class.active]="currentAddressType === 'work'"
+                    (click)="setAddressType('work')">
+              <mat-icon>work</mat-icon>
+              Work
+            </button>
+            <button type="button"
+                    class="type-btn"
+                    [class.active]="currentAddressType === 'other'"
+                    (click)="setAddressType('other')">
+              <mat-icon>location_on</mat-icon>
+              Other
+            </button>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="pincode"
+            placeholder="Pin Code"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Name"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="address"
+            placeholder="Address"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="city"
+            placeholder="City"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="area"
+            placeholder="Area (optional)"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="landmark"
+            placeholder="Landmark (optional)"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="state"
+            placeholder="State"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="country"
+            placeholder="Country"
+            readonly
+          >
+        </div>
+
+        <!-- Address Form Actions -->
+        <div class="form-actions" *ngIf="showAddressForm">
+          <button type="button" class="save-address-btn" (click)="saveCurrentAddress()">
+            {{ editingAddressId ? 'Update Address' : 'Save Address' }}
+          </button>
+          <button type="button" class="cancel-btn" (click)="hideAddressForm()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Billing Address -->
+    <div class="form-section">
+      <h2>Billing</h2>
+      <div class="toggle-switch">
+        <span>Bill to a different address</span>
+        <label class="switch">
+          <input type="checkbox" [checked]="billToDifferentAddress" (change)="toggleBillingAddress()">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="billing-address" *ngIf="billToDifferentAddress" formGroupName="billingAddress">
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Billing Name"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="address"
+            placeholder="Billing Address"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="city"
+            placeholder="City"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="state"
+            placeholder="State"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="pincode"
+            placeholder="Pin Code"
+          >
+        </div>
+
+        <div class="form-field">
+          <input
+            type="text"
+            formControlName="country"
+            placeholder="Country"
+            readonly
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Notes and Additional Info -->
+    <div class="form-section">
+      <h2>Notes</h2>
+      <div class="form-field">
+        <textarea
+          formControlName="deliveryInstructions"
+          placeholder="Do you need any additional instructions to deliver this order?"
+          rows="2"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Customized Gift -->
+    <div class="form-section">
+      <h2>Customized Gift (optional)</h2>
+      <div class="form-field">
+        <textarea
+          formControlName="customGift"
+          placeholder=""
+          rows="2"
+        ></textarea>
+      </div>
+
+      <!-- File Upload -->
+      <div class="file-upload">
+        <div class="upload-container"
+             (click)="fileInput.click()"
+             (dragover)="onDragOver($event)"
+             (dragleave)="onDragLeave($event)"
+             (drop)="onDrop($event)"
+             [class.drag-over]="isDragOver">
+          <img src="assets/icons/upload/upload-icon.svg" alt="Upload" class="upload-icon">
+          <span class="upload-text">{{ uploadedFiles.length > 0 ? 'File(s) selected' : 'Upload your files here' }}</span>
+          <div class="file-names" *ngIf="uploadedFiles.length > 0">
+            <div class="file-item" *ngFor="let file of uploadedFiles; let i = index">
+              <span class="file-name">{{ file.name }}</span>
+              <button type="button" class="remove-file" (click)="removeFile(i, $event)">✕</button>
+            </div>
+          </div>
+          <button type="button" class="browse-button">Browse</button>
+          <input #fileInput type="file" style="display: none" multiple (change)="onFileSelected($event)" accept="image/*,.pdf">
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Section -->
+    <div class="form-section">
+      <h2>Payment</h2>
+      <div class="payment-info">
+        <div class="selected-payment">
+          <div class="payment-icon razorpay-icon">
+            <img src="assets/icons/payment/razorpay.svg" alt="Razorpay">
+          </div>
+          <div class="payment-details">
+            <div class="payment-name">Secure Payment via Razorpay</div>
+            <div class="payment-description">Credit Card, Debit Card, Net Banking, UPI & Wallets</div>
+          </div>
+          <div class="security-badge">
+            <span class="secure-text">🔒 SSL Secured</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save for future orders -->
+    <div class="save-address">
+      <label class="checkbox-container">
+        <input type="checkbox" [checked]="saveForFuture" (change)="toggleSaveAddress()">
+        <span class="checkmark"></span>
+        <span class="checkbox-label">Save this address for future orders</span>
+      </label>
+      <p class="save-note">We'll create an account using your details to make your next checkout faster.</p>
+
+      <!-- Use a different address option if using saved address -->
+      <button type="button" class="use-different-address" *ngIf="authService.currentUserValue?.address" (click)="resetAddressForm()">
+        Use a different address
+      </button>
+    </div>
+
+    <!-- Proceed Button -->
+    <button type="submit" class="proceed-button" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Proceed to Payment</span>
+      <div *ngIf="isLoading" class="button-spinner"></div>
+    </button>
+  </form>
+
+  <!-- UPI Payment Info Modal -->
+  <div class="upi-modal" *ngIf="showUpiInfo">
+    <div class="upi-modal-content">
+      <button class="close-button" (click)="closeUpiInfo()">×</button>
+
+      <h2>UPI Information</h2>
+      <p>Please use the UPI ID or scan the QR code to complete your payment.</p>
+
+      <div class="upi-id-section">
+        <h3>UPI ID:</h3>
+        <div class="upi-id">
+          <span>padmavathy245-1&#64;okaxis</span>
+          <button class="copy-button" (click)="copyUpiId()">Copy</button>
+        </div>
+      </div>
+
+      <div class="qr-code-section">
+        <h3>QR Code:</h3>
+        <div class="qr-code">
+          <div class="user-profile">
+            <div class="profile-icon">p</div>
+            <div class="merchant-name">padma vathy</div>
+          </div>
+          <div class="qr-container">
+            <!-- QR code image -->
+            <img src="assets/images/payment/upi-qr-code.png" alt="QR Code" class="qr-image" style="width: 180px; height: 180px; display: block;">
+          </div>
+          <div class="upi-id-display">UPI ID: padmavathy245-1&#64;okaxis</div>
+        </div>
+      </div>
+
+      <div class="payment-instructions">
+        <ul>
+          <li>1. Open any UPI app on your mobile</li>
+          <li>2. Scan this QR code or use UPI ID</li>
+          <li>3. Enter amount and complete payment</li>
+        </ul>
+      </div>
+
+      <button class="done-button" (click)="completePayment()">Done</button>
+    </div>
+  </div>
+
+  <!-- Gift Loader -->
+  <app-gift-loader [isLoading]="isLoading" [message]="'Processing your order with love...'"></app-gift-loader>
+
+  <!-- Loading Spinner (fallback) -->
+  <app-loading-spinner [isLoading]="false"></app-loading-spinner>
+</div>
+
+<!-- Confirmation Dialog -->
+<div class="confirmation-overlay" *ngIf="showConfirmDialog" (click)="confirmDialogData.onCancel()">
+  <div class="confirmation-dialog" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h3>{{ confirmDialogData.title }}</h3>
+    </div>
+    <div class="dialog-content">
+      <p>{{ confirmDialogData.message }}</p>
+    </div>
+    <div class="dialog-actions">
+      <button class="cancel-btn" (click)="confirmDialogData.onCancel()">
+        {{ confirmDialogData.cancelText }}
+      </button>
+      <button class="confirm-btn" (click)="confirmDialogData.onConfirm()">
+        {{ confirmDialogData.confirmText }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <g fill="#F9C80E">
+    <rect x="20" y="30" width="60" height="40" rx="2" stroke="#333333" stroke-width="2"/>
+    <rect x="25" y="35" width="50" height="30" rx="1" stroke="#333333" stroke-width="2" fill="#FFFFFF"/>
+    <path d="M20,50 L80,50" stroke="#333333" stroke-width="2"/>
+    <path d="M50,30 L50,70" stroke="#333333" stroke-width="2"/>
+    <text x="37" y="45" font-family="Arial" font-size="10" fill="#333333">NAME</text>
+    <rect x="25" y="55" width="20" height="10" rx="1" stroke="#333333" stroke-width="1" fill="#EEEEEE"/>
+    <rect x="55" y="55" width="20" height="10" rx="1" stroke="#333333" stroke-width="1" fill="#EEEEEE"/>
+  </g>
+</svg>

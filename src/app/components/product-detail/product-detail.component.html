@@ -1,0 +1,96 @@
+<div class="product-detail-container">
+  <!-- Back button -->
+  <div class="back-button" (click)="goBack()">
+    <span class="material-icons">arrow_back</span>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading product details...</p>
+  </div>
+
+  <div class="product-content" *ngIf="!loading && product">
+    <!-- Product image -->
+    <div class="product-image">
+      <img [src]="product.image" [alt]="product.name" (error)="handleImageError($event)">
+      <div class="product-badge" *ngIf="product.badge">{{ product.badge }}</div>
+    </div>
+
+    <!-- Product info -->
+    <div class="product-info">
+      <h1 class="product-name">{{ product.name }}</h1>
+      
+      <!-- Price -->
+      <div class="product-price">
+        <span class="current-price">₹{{ product.price.toFixed(2) }}</span>
+        <span class="discount" *ngIf="product.discount">({{ product.discount }} Off)</span>
+        <span class="original-price" *ngIf="product.originalPrice">₹{{ product.originalPrice.toFixed(2) }}</span>
+      </div>
+
+      <!-- Quantity selector -->
+      <div class="quantity-selector">
+        <span class="quantity-label">Quantity:</span>
+        <div class="quantity-controls">
+          <button class="quantity-btn" (click)="decrementQuantity()">-</button>
+          <input type="number" [(ngModel)]="quantity" min="1" max="25">
+          <button class="quantity-btn" (click)="incrementQuantity()" [disabled]="quantity >= 25">+</button>
+          <span class="max-quantity-message" *ngIf="maxQuantityReached">Max 25!</span>
+        </div>
+      </div>
+      
+      <!-- Description -->
+      <div class="product-description">
+        <h3>Description</h3>
+        <p>{{ product.description || 'A perfect gift for all occasions. This premium quality gift will bring joy and happiness to your loved ones.' }}</p>
+      </div>
+      
+      <!-- Product Features - using simple emoji icons instead of SVG files -->
+      <div class="product-features">
+        <div class="feature-item">
+          <span class="feature-icon">🎁</span>
+          <span class="feature-text">Premium Packaging</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🚚</span>
+          <span class="feature-text">Free Shipping</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">⏱️</span>
+          <span class="feature-text">24-48 hr Delivery</span>
+        </div>
+        <div class="feature-item" *ngIf="product.name.includes('Custom') || product.name.includes('Birthday') || product.name.includes('Wedding')">
+          <span class="feature-icon">✏️</span>
+          <span class="feature-text">Customization Available</span>
+        </div>
+      </div>
+
+      <!-- Add to cart button -->
+      <div class="action-buttons">
+        <button class="add-to-cart-btn" (click)="addToCart()" [disabled]="addingToCart">
+          <span *ngIf="!addingToCart">Add to Cart</span>
+          <div class="button-spinner" *ngIf="addingToCart"></div>
+        </button>
+        <button class="buy-now-btn" (click)="buyNow()">Buy Now</button>
+        <button class="wishlist-btn" (click)="toggleWishlist()" [ngClass]="{'active': isInWishlist}">
+          <mat-icon>{{ isInWishlist ? 'favorite' : 'favorite_border' }}</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related products -->
+  <div class="related-products" *ngIf="!loading && product && relatedProducts.length > 0">
+    <h2>You might also like</h2>
+    <div class="related-products-grid">
+      <div class="related-product-card" *ngFor="let relatedProduct of relatedProducts" (click)="goToProductDetail(relatedProduct.id)">
+        <div class="related-product-image">
+          <img [src]="relatedProduct.image" [alt]="relatedProduct.name" (error)="handleImageError($event)">
+        </div>
+        <div class="related-product-info">
+          <h3>{{ relatedProduct.name }}</h3>
+          <p class="related-product-price">₹{{ relatedProduct.price.toFixed(2) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

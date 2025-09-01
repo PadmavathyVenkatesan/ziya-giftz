@@ -1,0 +1,41 @@
+<div class="order-confirmation">
+  <div class="confirmation-header">
+    <div class="success-icon">
+      <mat-icon>check_circle</mat-icon>
+    </div>
+    <h1>Order Confirmed!</h1>
+    <p class="confirmation-message">Your order has been placed successfully.</p>
+  </div>
+
+  <div class="order-details">
+    <div class="detail-row">
+      <span class="label">Order ID:</span>
+      <span class="value">{{ orderId }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">Order Date:</span>
+      <span class="value">{{ orderDate | date:'dd MMM yyyy' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">Expected Delivery:</span>
+      <span class="value delivery-date">{{ expectedDelivery | date:'dd MMM yyyy' }}</span>
+    </div>
+  </div>
+
+  <div class="track-section">
+    <p>You can track your order status anytime.</p>
+    <button class="track-button" routerLink="/track-order">Track Order</button>
+  </div>
+
+  <div class="continue-shopping">
+    <button class="continue-button" routerLink="/home">Continue Shopping</button>
+  </div>
+
+
+  <div class="whatsapp-button">
+    <a href="https://wa.me/+911234567890" class="whatsapp-link">
+      <img src="assets/icons/whatsapp.svg" alt="WhatsApp">
+      <span>Contact</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="top-categories-navigation">
+  <button class="nav-scroll-btn nav-scroll-left" (click)="scrollCategories('left')">&lt;</button>
+  <ul class="categories-container">
+    <li *ngFor="let category of topCategories">
+      <a [routerLink]="category.routePath"
+         (click)="selectCategory(category.name)"
+         [class.active-category]="category.name === activeCategory"
+         routerLinkActive="router-link-active">{{ category.name }}</a>
+    </li>
+  </ul>
+  <button class="nav-scroll-btn nav-scroll-right" (click)="scrollCategories('right')">&gt;</button>
+</div>

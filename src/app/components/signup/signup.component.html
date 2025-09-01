@@ -1,0 +1,185 @@
+<div class="signup-container">
+  <div class="signup-header">
+    <button *ngIf="currentStep > 1" class="back-button" (click)="prevStep()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Create Account</h1>
+  </div>
+  
+  <!-- Progress bar -->
+  <div class="progress-bar">
+    <div class="progress-step" [class.active]="currentStep >= 1" [class.completed]="currentStep > 1">
+      <div class="step-number">1</div>
+      <div class="step-label">Personal Info</div>
+    </div>
+    <div class="progress-line" [class.active]="currentStep >= 2"></div>
+    <div class="progress-step" [class.active]="currentStep >= 2" [class.completed]="currentStep > 2">
+      <div class="step-number">2</div>
+      <div class="step-label">Address</div>
+    </div>
+    <div class="progress-line" [class.active]="currentStep >= 3"></div>
+    <div class="progress-step" [class.active]="currentStep >= 3">
+      <div class="step-number">3</div>
+      <div class="step-label">Password</div>
+    </div>
+  </div>
+  
+  <!-- Verification message for pre-verified phones -->
+  <div class="info-alert" *ngIf="verifiedPhone && !errorMessage">
+    <strong>Creating New Account:</strong> Your phone number has been verified, but we don't have an account with this number yet. 
+    Please complete your information to create a new account. 
+    <div class="alert-actions">
+      <a (click)="goToLogin()">Already have an account? Login instead</a>
+    </div>
+  </div>
+  
+  <!-- Error message at the top -->
+  <div class="error-alert" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+  
+  <!-- Loading indicator -->
+  <div class="loading-indicator" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Please wait...</p>
+  </div>
+  
+  <form class="signup-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Step 1: Personal Information -->
+    <div class="form-step" *ngIf="currentStep === 1">
+      <h2>Personal Information</h2>
+      
+      <div class="form-field">
+        <input type="text" placeholder="Full Name" formControlName="name">
+        <div class="error-message" *ngIf="signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)">
+          Please enter your full name
+        </div>
+      </div>
+      
+      <div class="form-field">
+        <input type="email" placeholder="Email Address" formControlName="email">
+        <div class="error-message" *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
+          Please enter a valid email address
+        </div>
+      </div>
+      
+      <div class="form-field">
+        <div class="phone-input-wrapper">
+          <div class="flag-container" (click)="toggleCountryDropdown()">
+            <img class="flag" [src]="selectedCountry?.flag || ''" alt="Country flag">
+            <span class="dial-code">{{ selectedCountry?.dialCode }}</span>
+            <span class="arrow-down"></span>
+          </div>
+          <input type="tel" placeholder="Phone Number" formControlName="phone" id="phone" #phoneInput>
+        </div>
+        <div class="error-message" *ngIf="signupForm.get('phone')?.invalid && (signupForm.get('phone')?.dirty || signupForm.get('phone')?.touched)">
+          <ng-container *ngIf="signupForm.get('phone')?.hasError('required')">Please enter your phone number</ng-container>
+          <ng-container *ngIf="signupForm.get('phone')?.hasError('invalidPhoneNumber')">Please enter a valid phone number</ng-container>
+        </div>
+      </div>
+      
+      <!-- Country dropdown -->
+      <div class="country-dropdown" *ngIf="showCountryDropdown">
+        <div class="country-list">
+          <div class="country-item" *ngFor="let country of countries" (click)="selectCountry(country)">
+            <img class="flag" [src]="country.flag" [alt]="country.name">
+            <span class="country-name">{{ country.name }}</span>
+            <span class="dial-code">{{ country.dialCode }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <button type="button" class="next-button" (click)="nextStep()" [disabled]="!stepOneValid">
+        Continue
+      </button>
+      
+      <div class="login-link">
+        Already have an account? <a routerLink="/login">Log In</a>
+      </div>
+    </div>
+    
+    <!-- Step 2: Address Information -->
+    <div class="form-step" *ngIf="currentStep === 2">
+      <h2>Address Information</h2>
+      
+      <div class="form-field">
+        <textarea placeholder="Address" formControlName="address" rows="3"></textarea>
+        <div class="error-message" *ngIf="signupForm.get('address')?.invalid && (signupForm.get('address')?.dirty || signupForm.get('address')?.touched)">
+          Please enter your address
+        </div>
+      </div>
+      
+      <div class="form-field">
+        <input type="text" placeholder="City" formControlName="city">
+        <div class="error-message" *ngIf="signupForm.get('city')?.invalid && (signupForm.get('city')?.dirty || signupForm.get('city')?.touched)">
+          Please enter your city
+        </div>
+      </div>
+      
+      <div class="form-field">
+        <input type="text" placeholder="State" formControlName="state">
+        <div class="error-message" *ngIf="signupForm.get('state')?.invalid && (signupForm.get('state')?.dirty || signupForm.get('state')?.touched)">
+          Please enter your state
+        </div>
+      </div>
+      
+      <div class="form-field">
+        <input type="text" placeholder="PIN Code" formControlName="pincode" maxlength="6">
+        <div class="error-message" *ngIf="signupForm.get('pincode')?.invalid && (signupForm.get('pincode')?.dirty || signupForm.get('pincode')?.touched)">
+          Please enter a valid 6-digit PIN code
+        </div>
+      </div>
+      
+      <button type="button" class="next-button" (click)="nextStep()" [disabled]="!stepTwoValid">
+        Continue
+      </button>
+    </div>
+    
+    <!-- Step 3: Password & Preferences -->
+    <div class="form-step" *ngIf="currentStep === 3">
+      <h2>Create Password</h2>
+      
+      <div class="form-field">
+        <input type="password" placeholder="Password" formControlName="password">
+        <div class="error-message" *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">
+          Password must be at least 8 characters
+        </div>
+      </div>
+      
+      <div class="form-field">
+        <input type="password" placeholder="Confirm Password" formControlName="passwordConfirm">
+        <div class="error-message" *ngIf="signupForm.get('passwordConfirm')?.invalid && (signupForm.get('passwordConfirm')?.dirty || signupForm.get('passwordConfirm')?.touched)">
+          <span *ngIf="signupForm.hasError('passwordMismatch')">Passwords do not match</span>
+          <span *ngIf="!signupForm.hasError('passwordMismatch')">Please confirm your password</span>
+        </div>
+      </div>
+      
+      <div class="toggle-switch">
+        <span>Receive notifications</span>
+        <label class="switch">
+          <input type="checkbox" formControlName="notifications">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="save-address">
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="termsAccepted">
+          <span class="checkmark"></span>
+          <span class="checkbox-label">I agree to the Terms & Conditions and Privacy Policy</span>
+        </label>
+        <div class="error-message" *ngIf="signupForm.get('termsAccepted')?.invalid && (signupForm.get('termsAccepted')?.dirty || signupForm.get('termsAccepted')?.touched)">
+          You must accept the terms and conditions
+        </div>
+      </div>
+      
+      <button type="submit" class="create-account-button" [disabled]="!stepThreeValid || isLoading">
+        {{ isLoading ? 'Creating Account...' : 'Create Account' }}
+      </button>
+      
+      <div class="login-link">
+        Already have an account? <a routerLink="/login">Log In</a>
+      </div>
+    </div>
+  </form>
+</div>

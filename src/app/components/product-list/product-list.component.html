@@ -1,0 +1,92 @@
+<app-minimum-order-banner [showPromotional]="true"></app-minimum-order-banner>
+
+<div class="product-list-container">
+  <!-- Top Categories with images -->
+  <div class="top-categories-section">
+    <h2>Shop by Categories</h2>
+    <div class="top-categories">
+      <div class="category-item" *ngFor="let category of topCategories" (click)="selectCategory(category.name)">
+        <div class="category-image">
+          <img [src]="category.imageUrl" [alt]="category.name" (error)="handleImageError($event)">
+        </div>
+        <div class="category-name">{{ category.name }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product grid -->
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of products">
+      <!-- Product image -->
+      <div class="product-image">
+        <!-- Using an error handler to show a default image if the real one fails to load -->
+        <img
+          [src]="product.imageUrl"
+          [alt]="product.name"
+          (click)="viewProductDetails(product)"
+          (error)="handleImageError($event)"
+        >
+        <!-- Product badge text if applicable -->
+        <div class="product-badge" *ngIf="product.badge" [ngClass]="getBadgeClass(product.badge)">
+          <ng-container>{{ product.badge }}</ng-container>
+        </div>
+        <!-- Wishlist button -->
+        <div class="wishlist-btn" [ngClass]="{'active': product.isWishlisted}" (click)="toggleWishlist(product, $event)">
+          <mat-icon>{{ product.isWishlisted ? 'favorite' : 'favorite_border' }}</mat-icon>
+        </div>
+      </div>
+
+      <!-- Product info -->
+      <div class="product-info">
+        <h3 class="product-name" (click)="viewProductDetails(product)">{{ product.name }}</h3>
+
+        <div class="product-price">
+          <span class="current-price">₹{{ product.price.toFixed(2) }}</span>
+          <span class="discount" *ngIf="product.discount">({{ product.discount }})</span>
+          <span class="original-price" *ngIf="product.originalPrice">₹{{ product.originalPrice.toFixed(2) }}</span>
+        </div>
+
+        <!-- Product features - Always show container, even if no features -->
+        <div class="product-features">
+          <div class="feature-item" *ngFor="let feature of product.productFeatures">
+            <span class="feature-icon">{{ feature.icon }}</span>
+            <span class="feature-text">{{ feature.text }}</span>
+          </div>
+        </div>
+
+        <!-- Show quantity controls if product is in cart -->
+        <div class="quantity-controls" *ngIf="product.showQuantity">
+          <button class="quantity-btn minus" (click)="decrementQuantity(product)">-</button>
+          <span class="quantity">{{ product.quantity }}</span>
+          <button class="quantity-btn plus" (click)="incrementQuantity(product)">+</button>
+        </div>
+
+        <!-- Show Add to Cart button if product is not in cart -->
+        <button
+          class="add-to-cart-btn"
+          *ngIf="!product.showQuantity"
+          (click)="addToCart(product)"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading more products...</p>
+  </div>
+
+  <!-- Load more button -->
+  <div class="load-more-container" *ngIf="!isLoading">
+    <button class="load-more-btn" (click)="loadMore()" [disabled]="isLoadingMore">
+      <span *ngIf="!isLoadingMore">Load More</span>
+      <div *ngIf="isLoadingMore" class="load-more-spinner">
+        <mat-icon class="spinning">refresh</mat-icon>
+        <span>Loading...</span>
+      </div>
+    </button>
+  </div>
+</div>

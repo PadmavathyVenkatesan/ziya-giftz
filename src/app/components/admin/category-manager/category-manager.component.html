@@ -1,0 +1,94 @@
+<div class="category-manager-container">
+  <h1>Category Manager</h1>
+
+  <!-- Messages -->
+  <div class="messages">
+    <div class="error-message" *ngIf="errorMessage">
+      <span>{{ errorMessage }}</span>
+      <button class="close-btn" (click)="clearMessages()">×</button>
+    </div>
+    <div class="success-message" *ngIf="successMessage">
+      <span>{{ successMessage }}</span>
+      <button class="close-btn" (click)="clearMessages()">×</button>
+    </div>
+  </div>
+
+  <!-- Category Form -->
+  <div class="category-form">
+    <h2>{{ isEditing ? 'Edit Category' : 'Add New Category' }}</h2>
+    
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Category Name *</label>
+        <input type="text" id="name" formControlName="name" placeholder="Category Name">
+        <div class="error-hint" *ngIf="categoryForm.get('name')?.touched && categoryForm.get('name')?.invalid">
+          Category name is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="imageUrl">Image URL *</label>
+        <input type="text" id="imageUrl" formControlName="imageUrl" placeholder="Image URL">
+        <div class="error-hint" *ngIf="categoryForm.get('imageUrl')?.touched && categoryForm.get('imageUrl')?.invalid">
+          Image URL is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" rows="3" placeholder="Category Description"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="displayOrder">Display Order</label>
+        <input type="number" id="displayOrder" formControlName="displayOrder" min="0">
+      </div>
+      
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="resetForm()" [disabled]="isLoading">
+          Cancel
+        </button>
+        <button type="submit" class="submit-btn" [disabled]="categoryForm.invalid || isLoading">
+          {{ isEditing ? 'Update Category' : 'Add Category' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Categories List -->
+  <div class="categories-list">
+    <h2>Existing Categories</h2>
+    
+    <div class="loading" *ngIf="isLoading">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+    
+    <div class="no-categories" *ngIf="categories.length === 0 && !isLoading">
+      <p>No categories found. Please add a new category.</p>
+    </div>
+    
+    <div class="category-cards" *ngIf="categories.length > 0 && !isLoading">
+      <div class="category-card" *ngFor="let category of categories">
+        <div class="category-image">
+          <img [src]="category.imageUrl" [alt]="category.name">
+        </div>
+        <div class="category-details">
+          <h3>{{ category.name }}</h3>
+          <p *ngIf="category.description">{{ category.description }}</p>
+          <p *ngIf="category.displayOrder !== undefined" class="order-info">
+            Display Order: {{ category.displayOrder }}
+          </p>
+        </div>
+        <div class="category-actions">
+          <button class="edit-btn" (click)="editCategory(category)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="delete-btn" (click)="deleteCategory(category)" *ngIf="category.name !== 'All'">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

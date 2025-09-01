@@ -1,0 +1,429 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-color) !important;
+  color: var(--text-primary) !important;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Theme Button - Simple Circle Design */
+app-floating-theme-button .floating-theme-btn {
+  background: var(--navbar-background) !important;
+  color: var(--text-inverse) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 56px !important;
+  height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 8px 25px var(--primary-shadow) !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
+  font-size: 0 !important;
+}
+
+app-floating-theme-button .floating-theme-btn:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 12px 35px var(--primary-shadow) !important;
+  background: var(--navbar-background) !important;
+}
+
+app-floating-theme-button .theme-icon {
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  color: var(--text-inverse) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+app-floating-theme-button .theme-text {
+  display: none !important;
+}
+
+/* WhatsApp Button - Clean Design */
+.contact-floating-button button {
+  background: linear-gradient(135deg, #25d366 0%, #20c55a 100%) !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  outline: none !important;
+  position: relative !important;
+}
+
+.contact-floating-button button::before,
+.contact-floating-button button::after {
+  display: none !important;
+}
+
+.contact-floating-button span {
+  display: none !important;
+}
+
+.search-container {
+  background-color: var(--card-background) !important;
+  color: var(--text-primary) !important;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border-color);
+
+  .search-box {
+    display: flex;
+    width: 100%;
+    height: 36px;
+    position: relative;
+
+    input {
+      flex-grow: 1;
+      padding: 8px 45px 8px 15px;
+      border: 1px solid var(--border-color) !important;
+      background-color: var(--card-background) !important;
+      color: var(--text-primary) !important;
+      border-radius: 25px;
+      outline: none;
+      font-size: 14px;
+      min-width: 0; /* Important for flexbox items */
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        border-color: var(--primary-color) !important;
+      }
+
+      &::placeholder {
+        color: var(--text-secondary) !important;
+      }
+
+      &:focus {
+        border-color: #7559be;
+        box-shadow: 0 0 0 2px rgba(117, 89, 190, 0.1);
+      }
+    }
+
+    .search-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: transparent;
+      color: #7559be;
+      border: none;
+      height: 36px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(117, 89, 190, 0.1);
+      }
+
+      mat-icon {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: 8px;
+  /* Remove overflow settings to let the body handle scrolling */
+  position: relative;
+  z-index: 1; /* Ensure content appears above footer */
+}
+
+.app-footer {
+  width: 100%;
+  position: relative;
+  z-index: 0; /* Place footer below content in z-index stack */
+}
+
+/* WhatsApp Contact Button */
+.contact-floating-button {
+  position: fixed !important;
+  bottom: 70px !important;
+  right: 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  z-index: 10000 !important; /* Higher z-index than navbar */
+  text-decoration: none !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+
+  button {
+    background: linear-gradient(135deg, #25d366 0%, #20c55a 100%) !important;
+    width: 56px !important;
+    height: 56px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    border-radius: 50% !important;
+    color: white !important;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    will-change: transform !important;
+    position: relative !important;
+    outline: none !important;
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+
+    i {
+      font-size: 24px !important;
+      color: white !important;
+      position: relative !important;
+      z-index: 1 !important;
+    }
+
+    &:hover {
+      transform: translateY(-2px) scale(1.05) !important;
+      box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4) !important;
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(1.02) !important;
+    }
+
+    &:focus {
+      outline: none !important;
+    }
+  }
+
+  span {
+    display: none; /* Hide the WhatsApp text to keep it clean */
+  }
+}
+
+@media (max-width: 600px) {
+  .search-container {
+    padding: 5px 8px;
+
+    .search-box {
+      height: 32px;
+
+      input {
+        padding: 5px 36px 5px 10px;
+        font-size: 13px;
+      }
+
+      .search-btn {
+        width: 36px;
+        height: 32px;
+
+        mat-icon {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
+  .contact-floating-button {
+    bottom: 65px;
+    right: 15px;
+
+    button {
+      width: 50px;
+      height: 50px;
+
+      i {
+        font-size: 24px;
+      }
+    }
+
+    span {
+      font-size: 11px;
+      padding: 2px 8px;
+    }
+  }
+}
+
+/* EMERGENCY FIXES - HIGHEST PRIORITY */
+
+/* Hide any CSS text that might be showing in the UI - MAXIMUM FORCE */
+*:contains("background: #FF0000"),
+*:contains(".whatsapp-icon"),
+*:contains("background-color: #25D366"),
+*:contains("} .whatsapp-icon {"),
+*:contains("!important; }"),
+div:contains("background: #FF0000"),
+span:contains("background-color: #25D366"),
+p:contains("} .whatsapp-icon {"),
+body *:contains("background: #FF0000 !important; } .whatsapp-icon"),
+*[innerHTML*="background: #FF0000"],
+*[innerHTML*=".whatsapp-icon"],
+*[innerHTML*="background-color: #25D366"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -99999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+  z-index: -99999 !important;
+}
+
+/* Force floating theme button to be visible */
+app-floating-theme-button,
+app-floating-theme-button .floating-theme-container {
+  position: fixed !important;
+  bottom: 140px !important;
+  right: 20px !important;
+  z-index: 99999 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: auto !important;
+}
+
+/* Enhanced theme button styling */
+app-floating-theme-button .floating-theme-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 12px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 14px !important;
+  box-shadow: 0 8px 25px var(--primary-shadow) !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  backdrop-filter: blur(20px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+app-floating-theme-button .floating-theme-btn:hover {
+  transform: translateY(-2px) scale(1.05) !important;
+  box-shadow: 0 12px 35px var(--primary-shadow) !important;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+app-floating-theme-button .theme-icon {
+  font-size: 20px !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+app-floating-theme-button .theme-text {
+  font-weight: 600 !important;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+/* Emergency theme button styling */
+.floating-theme-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50px !important;
+  padding: 12px 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.floating-theme-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 25px var(--primary-shadow) !important;
+}
+app-floating-theme-button,
+.contact-floating-button {
+  position: fixed !important;
+  z-index: 10000 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: auto !important;
+}
+
+/* Additional fixes for theme button visibility */
+app-floating-theme-button .floating-theme-container {
+  position: fixed !important;
+  bottom: 140px !important;
+  right: 20px !important;
+  z-index: 10001 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+/* ULTIMATE THEME BUTTON FORCE VISIBILITY */
+app-floating-theme-button {
+  position: fixed !important;
+  bottom: 140px !important;
+  right: 20px !important;
+  z-index: 99999 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: auto !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+app-floating-theme-button * {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: initial !important;
+}
+
+app-floating-theme-button mat-icon {
+  font-family: 'Material Icons' !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
+  word-wrap: normal !important;
+  direction: ltr !important;
+  color: white !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+app-floating-theme-button .floating-theme-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 56px !important;
+  height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}

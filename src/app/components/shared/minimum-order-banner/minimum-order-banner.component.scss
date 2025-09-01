@@ -1,0 +1,162 @@
+.minimum-order-banner {
+  background: linear-gradient(to right, #14213d, #1e3a8a);
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 100;
+
+  // Animated shine effect
+  &:after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    animation: shine 4s infinite;
+    z-index: -1;
+  }
+
+  // Add a subtle pattern overlay
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 60%);
+    z-index: -1;
+  }
+
+  .banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    .banner-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+
+      p {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        animation: fadeInOut 1.5s infinite alternate;
+
+        .price-amount {
+          color: #fca311; // Golden/amber color for the price
+          font-weight: bold;
+          font-size: 18px;
+          margin: 0 4px;
+          text-shadow: 0 0 8px rgba(252, 163, 17, 0.5);
+        }
+      }
+
+      &.promotional {
+        justify-content: space-between;
+
+        @media (max-width: 600px) {
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .promo-message {
+          font-weight: 600;
+          font-size: 18px;
+          animation: slideIn 0.5s ease-out forwards;
+        }
+
+        .shop-now-btn {
+          background-color: #fca311;
+          color: #000;
+          border: none;
+          padding: 6px 16px;
+          border-radius: 20px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .btn-icon {
+            width: 16px;
+            height: 16px;
+            filter: brightness(0);
+          }
+
+          &:hover {
+            background-color: #ffb703;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+            .btn-icon {
+              animation: swing 0.5s ease-in-out;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}

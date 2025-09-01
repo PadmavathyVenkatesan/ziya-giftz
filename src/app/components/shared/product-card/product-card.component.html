@@ -1,0 +1,61 @@
+<div class="product-card">
+  <!-- Product image -->
+  <div class="product-image">
+    <img [src]="product.imageUrl" [alt]="product.name" (click)="viewProductDetails()">
+    <!-- Product badge text if applicable -->
+    <div class="product-badge" *ngIf="product.badge" [ngClass]="getBadgeClass(product.badge)">
+      <ng-container>{{ product.badge }}</ng-container>
+    </div>
+    <!-- Wishlist button -->
+    <div class="wishlist-btn" [ngClass]="{'active': product.isWishlisted}" (click)="toggleWishlist($event)">
+      <i class="fa" [ngClass]="product.isWishlisted ? 'fa-heart' : 'fa-heart-o'"></i>
+    </div>
+  </div>
+
+  <!-- Product info -->
+  <div class="product-info">
+    <h3 class="product-name" (click)="viewProductDetails()">{{ product.name }}</h3>
+
+    <div class="product-price">
+      <span class="current-price">₹{{ product.price.toFixed(2) }}</span>
+      <span class="discount" *ngIf="product.discount">({{ product.discount }})</span>
+      <span class="original-price" *ngIf="product.originalPrice">₹{{ product.originalPrice.toFixed(2) }}</span>
+    </div>
+
+    <!-- Product rating -->
+    <div class="product-rating">
+      <span class="stars">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-half-o"></i>
+      </span>
+      <span class="rating-count">({{ 10 + (product.id || 0) * 5 }})</span>
+    </div>
+
+    <!-- Product features - Always show container, even if no features -->
+    <div class="product-features">
+      <div class="feature-item" *ngFor="let feature of product.productFeatures">
+        <img [src]="feature.icon" [alt]="feature.text" class="feature-icon">
+        <span class="feature-text">{{ feature.text }}</span>
+      </div>
+    </div>
+
+    <!-- Show quantity controls if product is in cart -->
+    <div class="quantity-controls" *ngIf="product.showQuantity">
+      <button class="quantity-btn minus" (click)="decrementQuantity()">-</button>
+      <span class="quantity">{{ product.quantity }}</span>
+      <button class="quantity-btn plus" (click)="incrementQuantity()">+</button>
+    </div>
+
+    <!-- Show Add to Cart button if product is not in cart -->
+    <button
+      class="add-to-cart-btn"
+      *ngIf="!product.showQuantity"
+      (click)="addToCart()"
+    >
+      Add to Cart
+    </button>
+  </div>
+</div>

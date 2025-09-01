@@ -1,8 +1,64 @@
-# ZiyaGiftz
+# Ziya Giftz - E-Commerce Mobile App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+A mobile-first e-commerce Angular application for gift shopping, featuring a modern UI with complete shopping experience.
+
+## Features
+
+- **Mobile-First Design**: Optimized for mobile devices with a responsive design
+- **Product Browsing**: Browse products by categories with filtering options
+- **Shopping Cart**: Add, remove, and update quantities of products in your cart
+- **User Authentication**: Login via mobile number with OTP verification
+- **Order Tracking**: Track your orders with detailed status updates
+- **Responsive UI**: Consistent experience across different screen sizes
+
+## Technologies Used
+
+- Angular 19
+- Angular Material
+- Angular Flex Layout
+- FontAwesome
+- SCSS
+
+## Application Structure
+
+The application follows a component-based architecture:
+
+- **Navbar**: Bottom navigation bar with main app sections
+- **Footer**: Expandable sections for policies, contact details, and support
+- **Product List**: Grid display of available products with filtering
+- **Cart**: Shopping cart management with item quantity controls
+- **Login**: Mobile number authentication with OTP verification
+- **Track Order**: Order tracking with status timeline
+
+## Services
+
+- **Cart Service**: Manages shopping cart state and operations
+- **Product Service**: Handles product data and filtering functionality
+
+## Installation
+
+1. Clone the repository
+2. Install dependencies:
+```
+npm install --legacy-peer-deps
+```
+3. Run the development server:
+```
+ng serve
+```
+4. Open your browser to `http://localhost:4200/`
+
+## Development Notes
+
+- Uses standalone components for better tree-shaking
+- Implements reactive forms for user input
+- Utilizes Angular Material for UI components
+- Custom styling with SCSS
+- Mock data services simulate backend functionality
 
 ## Development server
+
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
 
 To start a local development server, run:
 
@@ -12,20 +68,6 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
 ## Building
 
 To build the project run:
@@ -34,26 +76,13 @@ To build the project run:
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This will compile your project and store the build artifacts in the `dist/` directory.
 
-## Running unit tests
+## Future Enhancements
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Backend integration
+- Payment gateway integration
+- User profiles
+- Wishlist functionality
+- Product reviews and ratings
+- Push notifications

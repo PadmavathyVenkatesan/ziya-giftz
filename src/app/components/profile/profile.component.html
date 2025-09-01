@@ -1,0 +1,360 @@
+<div class="profile-container">
+  <!-- Loading indicator -->
+  <div class="loading-overlay" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading your profile...</p>
+  </div>
+
+  <div class="profile-header">
+    <div class="profile-image">
+      <div class="avatar">{{ currentUser?.name?.charAt(0) || 'U' }}</div>
+    </div>
+    <div class="profile-info">
+      <h1>Welcome, {{ currentUser?.name || 'User' }}!</h1>
+      <p>{{ currentUser?.email }}</p>
+      <p>{{ currentUser?.phone }}</p>
+    </div>
+  </div>
+
+  <div class="profile-tabs">
+    <div class="tab" [class.active]="activeTab === 'profile'" (click)="setActiveTab('profile')">
+      <mat-icon>person</mat-icon>
+      <span>Profile</span>
+    </div>
+    <div class="tab" [class.active]="activeTab === 'orders'" (click)="setActiveTab('orders')">
+      <mat-icon>shopping_bag</mat-icon>
+      <span>Orders</span>
+    </div>
+    <div class="tab" [class.active]="activeTab === 'addresses'" (click)="setActiveTab('addresses')">
+      <mat-icon>location_on</mat-icon>
+      <span>Addresses</span>
+    </div>
+    <div class="tab" [class.active]="activeTab === 'settings'" (click)="setActiveTab('settings')">
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <!-- Profile Tab -->
+    <div *ngIf="activeTab === 'profile'" class="profile-details">
+      <div class="detail-card">
+        <h2>Personal Information</h2>
+        <div class="detail-row">
+          <span class="label">Name</span>
+          <span class="value">{{ currentUser?.name || 'Not provided' }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Email</span>
+          <span class="value">{{ currentUser?.email || 'Not provided' }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Phone</span>
+          <span class="value">{{ currentUser?.phone || 'Not provided' }}</span>
+        </div>
+        <div class="detail-row" *ngIf="currentUser?.addresses && currentUser.addresses.length > 0">
+          <span class="label">Address</span>
+          <span class="value">{{ getDefaultAddress()?.address }}</span>
+        </div>
+        <div class="detail-row" *ngIf="currentUser?.addresses && currentUser.addresses.length > 0">
+          <span class="label">City</span>
+          <span class="value">{{ getDefaultAddress()?.city }}</span>
+        </div>
+        <div class="detail-row" *ngIf="currentUser?.addresses && currentUser.addresses.length > 0">
+          <span class="label">State</span>
+          <span class="value">{{ getDefaultAddress()?.state }}</span>
+        </div>
+        <div class="detail-row" *ngIf="currentUser?.addresses && currentUser.addresses.length > 0">
+          <span class="label">PIN Code</span>
+          <span class="value">{{ getDefaultAddress()?.pincode }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Tab -->
+    <div *ngIf="activeTab === 'orders'" class="orders-list">
+      <div class="empty-state" *ngIf="!currentUser?.orders || currentUser.orders.length === 0">
+        <mat-icon>shopping_cart</mat-icon>
+        <h3>No Orders Yet</h3>
+        <p>When you place orders, they will appear here.</p>
+        <button routerLink="/">Start Shopping</button>
+      </div>
+
+      <!-- We'll implement orders list here later -->
+    </div>
+
+    <!-- Addresses Tab -->
+    <div *ngIf="activeTab === 'addresses'" class="addresses-list">
+      <div class="detail-card">
+        <div class="section-header">
+          <h2>Saved Addresses</h2>
+          <button class="add-address-btn primary" (click)="showAddAddressForm = true">
+            <mat-icon>add</mat-icon>
+            Add Address
+          </button>
+        </div>
+
+        <div *ngIf="addresses && addresses.length > 0" class="addresses-grid">
+          <div *ngFor="let address of addresses" class="address-card" [class.default-address]="address.isDefault">
+            <div class="address-header">
+              <div class="address-title">
+                <h3>{{ address.name }}</h3>
+                <span class="address-type" [class]="address.type">{{ address.type | titlecase }}</span>
+                <span class="default-badge" *ngIf="address.isDefault">Default</span>
+              </div>
+              <div class="address-actions">
+                <button class="action-btn edit" (click)="editAddress(address)" title="Edit Address">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button class="action-btn default" (click)="setDefaultAddress(address._id!)"
+                        *ngIf="!address.isDefault" title="Set as Default">
+                  <mat-icon>star_border</mat-icon>
+                </button>
+                <button class="action-btn delete" (click)="deleteAddress(address._id!)" title="Delete Address">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <div class="address-content">
+              <div class="address-details">
+                <p class="address-line"><strong>{{ address.addressLine1 }}</strong></p>
+                <p class="address-line" *ngIf="address.addressLine2">{{ address.addressLine2 }}</p>
+                <p class="address-line">{{ address.city }}, {{ address.state }} {{ address.pincode }}</p>
+                <p class="address-line">{{ address.country || 'India' }}</p>
+                <p class="address-line" *ngIf="address.landmark">
+                  <mat-icon class="inline-icon">place</mat-icon>
+                  {{ address.landmark }}
+                </p>
+              </div>
+
+              <div class="contact-info">
+                <p class="contact-line">
+                  <mat-icon class="inline-icon">phone</mat-icon>
+                  {{ address.phone }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!addresses || addresses.length === 0" class="empty-state">
+          <div class="empty-icon">
+            <mat-icon>location_off</mat-icon>
+          </div>
+          <h3>No Addresses Saved</h3>
+          <p>Add your delivery addresses to make checkout faster</p>
+          <button class="add-address-btn primary" (click)="showAddAddressForm = true">
+            <mat-icon>add</mat-icon>
+            Add Your First Address
+          </button>
+        </div>
+
+        <!-- Add/Edit Address Form -->
+        <div *ngIf="showAddAddressForm || editingAddress" class="address-form-overlay" (click)="cancelAddressForm()">
+          <div class="address-form" (click)="$event.stopPropagation()">
+            <div class="form-header">
+              <h3>{{ editingAddress ? 'Edit Address' : 'Add New Address' }}</h3>
+              <button class="close-btn" (click)="cancelAddressForm()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+
+            <div class="form-content">
+              <div class="form-row">
+                <div class="form-field full-width">
+                  <label>Full Name *</label>
+                  <input type="text" placeholder="Enter your full name"
+                         [(ngModel)]="addressForm.name" class="form-input" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field full-width">
+                  <label>Phone Number *</label>
+                  <input type="tel" placeholder="Enter 10-digit phone number"
+                         [(ngModel)]="addressForm.phone" class="form-input" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field full-width">
+                  <label>Address Line 1 *</label>
+                  <textarea placeholder="House/Flat/Building No, Street Name"
+                           [(ngModel)]="addressForm.addressLine1" class="form-input" rows="2" required></textarea>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field full-width">
+                  <label>Address Line 2 (Optional)</label>
+                  <input type="text" placeholder="Area, Locality"
+                         [(ngModel)]="addressForm.addressLine2" class="form-input">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field half-width">
+                  <label>City *</label>
+                  <input type="text" placeholder="Enter city"
+                         [(ngModel)]="addressForm.city" class="form-input" required>
+                </div>
+                <div class="form-field half-width">
+                  <label>State *</label>
+                  <input type="text" placeholder="Enter state"
+                         [(ngModel)]="addressForm.state" class="form-input" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field half-width">
+                  <label>PIN Code *</label>
+                  <input type="text" placeholder="6-digit PIN" maxlength="6"
+                         [(ngModel)]="addressForm.pincode" class="form-input" required>
+                </div>
+                <div class="form-field half-width">
+                  <label>Country *</label>
+                  <input type="text" [(ngModel)]="addressForm.country" class="form-input" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field full-width">
+                  <label>Landmark (Optional)</label>
+                  <input type="text" placeholder="Nearby landmark"
+                         [(ngModel)]="addressForm.landmark" class="form-input">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field half-width">
+                  <label>Address Type</label>
+                  <select [(ngModel)]="addressForm.type" class="form-input">
+                    <option value="home">Home</option>
+                    <option value="work">Work</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="form-field half-width checkbox-field">
+                  <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="addressForm.isDefault">
+                    <span class="checkmark"></span>
+                    Set as default address
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="cancel-btn" (click)="cancelAddressForm()" [disabled]="addressFormLoading">
+                Cancel
+              </button>
+              <button class="save-btn" (click)="saveAddress()" [disabled]="addressFormLoading">
+                <span *ngIf="addressFormLoading" class="loading-spinner"></span>
+                {{ addressFormLoading ? 'Saving...' : (editingAddress ? 'Update Address' : 'Save Address') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div *ngIf="activeTab === 'settings'" class="settings-section">
+      <div class="detail-card">
+        <h2>Account Settings</h2>
+
+        <!-- Change Password Section -->
+        <div class="setting-option password-section">
+          <div class="setting-header">
+            <span>Change Password</span>
+            <button class="action-btn" (click)="showPasswordForm = !showPasswordForm">
+              {{ showPasswordForm ? 'Cancel' : 'Update' }}
+            </button>
+          </div>
+
+          <!-- Password Change Form -->
+          <div class="password-form" *ngIf="showPasswordForm">
+            <div class="form-field">
+              <input
+                type="password"
+                placeholder="Current Password"
+                [(ngModel)]="passwordForm.currentPassword"
+                class="form-input">
+            </div>
+            <div class="form-field">
+              <input
+                type="password"
+                placeholder="New Password"
+                [(ngModel)]="passwordForm.newPassword"
+                class="form-input">
+            </div>
+            <div class="form-field">
+              <input
+                type="password"
+                placeholder="Confirm New Password"
+                [(ngModel)]="passwordForm.confirmPassword"
+                class="form-input">
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" *ngIf="passwordChangeError">
+              {{ passwordChangeError }}
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" *ngIf="passwordChangeSuccess">
+              {{ passwordChangeSuccess }}
+            </div>
+
+            <div class="form-actions">
+              <button
+                class="submit-btn"
+                (click)="updatePassword()"
+                [disabled]="passwordChangeLoading">
+                {{ passwordChangeLoading ? 'Updating...' : 'Update Password' }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notification Preferences -->
+        <div class="setting-option">
+          <span>Notification Preferences</span>
+          <label class="switch">
+            <input type="checkbox" [checked]="currentUser?.notifications">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="logout-button">
+          <button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirmation Dialog -->
+<div class="confirmation-overlay" *ngIf="showConfirmDialog" (click)="confirmDialogData.onCancel()">
+  <div class="confirmation-dialog" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h3>{{ confirmDialogData.title }}</h3>
+    </div>
+    <div class="dialog-content">
+      <p>{{ confirmDialogData.message }}</p>
+    </div>
+    <div class="dialog-actions">
+      <button class="cancel-btn" (click)="confirmDialogData.onCancel()">
+        {{ confirmDialogData.cancelText }}
+      </button>
+      <button class="confirm-btn" (click)="confirmDialogData.onConfirm()">
+        {{ confirmDialogData.confirmText }}
+      </button>
+    </div>
+  </div>
+</div>

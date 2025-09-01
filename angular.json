@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ziya-giftz": {
+    "padma-giftz": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ziya-giftz",
+            "outputPath": "dist/padma-giftz",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -26,12 +26,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -64,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ziya-giftz:build:production"
+              "buildTarget": "padma-giftz:build:production"
             },
             "development": {
-              "buildTarget": "ziya-giftz:build:development"
+              "buildTarget": "padma-giftz:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,12 +84,11 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -98,5 +96,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "cf4e5a46-6ce0-4885-9ceb-24245fd4c217"
   }
 }

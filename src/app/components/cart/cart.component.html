@@ -1,0 +1,88 @@
+<app-minimum-order-banner [minimumAmount]="minimumOrderAmount"></app-minimum-order-banner>
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>My Cart</h1>
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading your cart...</p>
+  </div>
+
+  <!-- Empty cart state -->
+  <div class="cart-empty" *ngIf="!isLoading && cartItems.length === 0">
+    <div class="empty-icon">
+      <span class="material-icons">shopping_cart</span>
+    </div>
+    <p>Your cart is empty</p>
+    <button (click)="continueShopping()" class="continue-shopping">Continue Shopping</button>
+  </div>
+
+  <!-- Cart with items -->
+  <ng-container *ngIf="!isLoading && cartItems.length > 0">
+    <div class="cart-summary">
+      <div class="cart-item-count">
+        <span class="lock-icon">🔒</span>
+        <span class="count-text">You have {{ cartItems.length }} items in your cart</span>
+      </div>
+    </div>
+
+    <!-- Cart items -->
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cartItems">
+        <div class="item-image">
+          <img [src]="item.image" [alt]="item.name" (error)="handleImageError($event)">
+        </div>
+
+        <div class="item-details">
+          <h3>{{ item.name }}</h3>
+          <p class="item-price">
+            <span class="current-price">₹{{ item.price.toFixed(2) }}</span>
+          </p>
+        </div>
+
+        <div class="item-controls-wrapper">
+          <div class="quantity-controls">
+            <button (click)="decrementQuantity(item)" class="quantity-btn">-</button>
+            <span class="quantity-value">{{ item.quantity }}</span>
+            <button (click)="incrementQuantity(item)" class="quantity-btn" [disabled]="item.quantity >= 25">+</button>
+            <span class="max-quantity-message" *ngIf="maxQuantityReached[item.id]">Max 25!</span>
+          </div>
+          <button class="remove-btn" (click)="removeItem(item)" aria-label="Remove item">
+            <span class="material-icons">delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price summary -->
+    <div class="price-summary">
+      <div class="summary-row">
+        <span class="label">Item Total:</span>
+        <span class="value">₹{{ getTotalPrice().toFixed(2) }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Delivery Charge:</span>
+        <span class="value" [ngClass]="{'free': getDeliveryCharge() === 0}">
+          {{ getDeliveryCharge() === 0 ? 'FREE' : '₹' + getDeliveryCharge().toFixed(2) }}
+        </span>
+      </div>
+      <div class="summary-row savings" *ngIf="getTotalSavings() > 0">
+        <span class="label">Your Savings:</span>
+        <span class="value savings-value">₹{{ getTotalSavings().toFixed(2) }}</span>
+      </div>
+      <div class="summary-row total">
+        <span class="label">Grand Total:</span>
+        <span class="value">₹{{ getGrandTotal().toFixed(2) }}</span>
+      </div>
+    </div>
+
+    <!-- Checkout button -->
+    <div class="cart-footer">
+      <button class="checkout-btn" (click)="checkout()">
+        Proceed to Checkout
+      </button>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,470 @@
+/* ================== ANIMATION SYSTEM ================== */
+
+/* CSS Keyframes for Smooth Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-2px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px var(--primary-color);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--primary-color);
+  }
+}
+
+@keyframes themeTransition {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ================== ANIMATION UTILITY CLASSES ================== */
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.6s ease-out forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.animate-bounce {
+  animation: bounce 1s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-theme-transition {
+  animation: themeTransition 0.3s ease-out;
+}
+
+/* Staggered Animation Delays */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+
+/* ================== COMPONENT ANIMATIONS ================== */
+
+/* Card Animations */
+.card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideUp 0.6s ease-out;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px var(--shadow-hover);
+  }
+}
+
+/* Button Animations */
+.btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-hover);
+    
+    &::before {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  &:active {
+    transform: translateY(0);
+    transition: transform 0.1s;
+  }
+}
+
+/* Navbar Animations */
+.bottom-navbar {
+  animation: slideUp 0.8s ease-out;
+  
+  .nav-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-3px);
+      
+      mat-icon {
+        animation: bounce 0.6s ease-out;
+      }
+    }
+    
+    &.active {
+      animation: pulse 0.5s ease-out;
+    }
+  }
+}
+
+.top-navbar {
+  animation: slideDown 0.6s ease-out;
+  
+  .search-box input {
+    transition: all 0.3s ease;
+    
+    &:focus {
+      animation: glow 1s ease-in-out;
+    }
+  }
+}
+
+/* Product Card Animations */
+.product-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn 0.5s ease-out;
+  
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 15px 30px var(--shadow-hover);
+    
+    .product-image {
+      transform: scale(1.05);
+    }
+    
+    .btn-primary {
+      animation: pulse 0.5s ease-out;
+    }
+  }
+}
+
+/* Modal Animations */
+.modal {
+  .modal-dialog {
+    animation: scaleIn 0.4s ease-out;
+  }
+  
+  .modal-content {
+    transition: all 0.3s ease;
+  }
+  
+  &.fade .modal-dialog {
+    transform: scale(0.8);
+    transition: transform 0.3s ease-out;
+  }
+  
+  &.show .modal-dialog {
+    transform: scale(1);
+  }
+}
+
+/* Form Animations */
+.form-control {
+  transition: all 0.3s ease;
+  
+  &:focus {
+    transform: translateY(-1px);
+    animation: glow 0.5s ease-out;
+  }
+}
+
+/* Alert Animations */
+.alert {
+  animation: slideDown 0.5s ease-out;
+  
+  &.alert-dismissible {
+    transition: all 0.3s ease;
+  }
+}
+
+/* Loading Spinner */
+.spinner-border {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Theme Transition Animation */
+.theme-transitioning {
+  animation: themeTransition 0.4s ease-out;
+}
+
+/* Footer Animation */
+.app-footer {
+  animation: slideUp 1s ease-out;
+}
+
+/* List Animations */
+.list-group-item {
+  transition: all 0.3s ease;
+  animation: slideInLeft 0.5s ease-out;
+  
+  &:hover {
+    transform: translateX(4px);
+    background-color: var(--surface-color);
+  }
+}
+
+/* Badge Animations */
+.badge {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    animation: bounce 0.6s ease-out;
+  }
+}
+
+/* Dropdown Animations */
+.dropdown-menu {
+  animation: slideDown 0.3s ease-out;
+  
+  .dropdown-item {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: translateX(4px);
+    }
+  }
+}
+
+/* Progress Bar Animations */
+.progress-bar {
+  animation: slideInLeft 1s ease-out;
+}
+
+/* Breadcrumb Animations */
+.breadcrumb {
+  animation: fadeIn 0.6s ease-out;
+  
+  .breadcrumb-item {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* Table Animations */
+.table {
+  animation: fadeIn 0.7s ease-out;
+  
+  tbody tr {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.01);
+      background-color: var(--surface-color);
+    }
+  }
+}
+
+/* Pagination Animations */
+.pagination {
+  animation: slideUp 0.6s ease-out;
+  
+  .page-item .page-link {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* ================== RESPONSIVE ANIMATIONS ================== */
+
+/* Reduce animations on mobile for performance */
+@media (max-width: 768px) {
+  * {
+    animation-duration: 0.3s !important;
+  }
+  
+  .card:hover,
+  .btn:hover,
+  .product-card:hover {
+    transform: translateY(-2px) !important;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ================== THEME SWITCHING ANIMATIONS ================== */
+
+/* Smooth theme transition for all elements */
+* {
+  transition: 
+    background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Special theme transition animation for body */
+body.theme-transitioning {
+  animation: themeTransition 0.5s ease-out;
+}
+
+/* Enhanced theme button animation */
+.floating-theme-btn {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    animation: pulse 0.8s ease-in-out infinite;
+  }
+  
+  &.theme-changing {
+    animation: bounce 0.6s ease-out;
+  }
+}

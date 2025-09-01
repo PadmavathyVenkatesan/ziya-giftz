@@ -1,0 +1,169 @@
+.top-categories-navigation {
+  position: relative;
+  width: 100%;
+  background-color: var(--surface-color);
+  box-shadow: 0 2px 4px var(--shadow-color);
+  margin-bottom: 10px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+
+  /* Categories container */
+  .categories-container {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+    padding: 8px 12px;
+    margin: 0;
+    list-style-type: none;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    /* Hide scrollbar but allow scrolling */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    /* Category items */
+    li {
+      flex: 0 0 auto;
+      white-space: nowrap;
+
+      a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-primary);
+        text-decoration: none;
+        padding: 8px 12px;
+        position: relative;
+        transition: all 0.3s ease;
+        border-radius: 6px;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          color: var(--primary-500);
+          background-color: var(--surface-hover);
+        }
+
+        &.active-category {
+          color: var(--primary-500);
+          font-weight: 600;
+          background-color: var(--surface-active);
+        }
+
+        /* Active indicator */
+        &.active-category:after {
+          content: '';
+          position: absolute;
+          bottom: -6px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: var(--primary-500);
+          border-radius: 1px;
+        }
+      }
+    }
+  }  /* Navigation buttons */
+  .nav-scroll-btn {
+    width: 18px; /* Smaller size for less congestion */
+    height: 18px; /* Smaller size for less congestion */
+    border: none;
+    border-radius: 50%;
+    background-color: var(--primary-500, #FF6B6B); /* Primary color */
+    color: white; /* White text for better contrast */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Lighter shadow */
+
+    &:hover {
+      background-color: var(--primary-600, #e56060); /* Darker on hover */
+      transform: translateY(-50%) scale(1.05); /* Subtle scale effect */
+    }
+
+    /* Font size for < and > characters */
+    font-size: 10px; /* Smaller font for compact look */
+    line-height: 1;
+
+    &.nav-scroll-left {
+      left: 4px; /* Closer to edge */
+    }
+
+    &.nav-scroll-right {
+      right: 4px; /* Closer to edge */
+    }
+  }
+
+  /* Responsive styles */
+  @media (min-width: 1024px) {
+    .nav-scroll-btn {
+      display: flex; /* Show scroll buttons on desktop */
+    }
+
+    .categories-container {
+      padding: 2px 12px; /* Reduced padding */
+      justify-content: center; /* Center categories on desktop */
+
+      li a {
+        font-size: 12px; /* Slightly larger on desktop */
+        padding: 3px 6px;
+        min-height: 26px;
+      }
+    }
+  }
+
+  /* Show scroll buttons on mobile too */
+  @media (max-width: 1023px) {
+    .nav-scroll-btn {
+      width: 20px; /* Compact size for mobile */
+      height: 20px;
+      font-size: 12px; /* Smaller font for mobile */
+    }
+
+    .categories-container {
+      padding: 2px 8px; /* Compact padding for mobile */
+      gap: 3px; /* Reduced gap for mobile */
+
+      li a {
+        font-size: 10px; /* Smaller font on mobile */
+        padding: 2px 4px; /* Compact padding for mobile */
+        min-height: 22px; /* Smaller touch target */
+      }
+    }
+  }
+
+  /* Extra small devices */
+  @media (max-width: 480px) {
+    .nav-scroll-btn {
+      width: 18px; /* Even smaller on very small screens */
+      height: 18px;
+      font-size: 10px;
+    }
+
+    .categories-container {
+      padding: 1px 6px; /* Very compact padding */
+      gap: 2px; /* Minimal gap */
+
+      li a {
+        font-size: 9px; /* Very small font for very small screens */
+        padding: 1px 3px; /* Minimal padding */
+        min-height: 20px; /* Compact touch target */
+      }
+    }
+  }
+}

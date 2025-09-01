@@ -1,0 +1,97 @@
+<div class="login-container">
+  <div class="login-header">
+    <h2>Welcome back</h2>
+    <p>Login with your phone number to access your dashboard</p>
+  </div>
+
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!-- Error message display -->
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <div class="phone-input">
+      <div class="country-code" (click)="toggleCountryDropdown()">
+        <img [src]="selectedCountry?.flag" [alt]="selectedCountry?.name + ' flag'" class="flag-icon">
+        <span>{{ selectedCountry?.dialCode }}</span>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+
+        <div class="country-dropdown" *ngIf="showCountryDropdown">
+          <div class="country-item" *ngFor="let country of countries" (click)="selectCountry(country); $event.stopPropagation()">
+            <img [src]="country.flag" [alt]="country.name + ' flag'" class="flag-icon">
+            <span>{{ country.name }}</span>
+            <span class="dial-code">{{ country.dialCode }}</span>
+          </div>
+        </div>
+      </div>
+      <input
+        type="tel"
+        placeholder="Mobile Number"
+        formControlName="phone"
+        maxlength="10"
+      >
+    </div>
+
+    <div class="otp-container" *ngIf="otpSent">
+      <div class="otp-title">Enter verification code</div>
+      <div class="otp-inputs">
+        <input
+          type="text"
+          maxlength="1"
+          *ngFor="let control of otpControls; let i = index"
+          [formControl]="control"
+          (keyup)="onOtpDigitInput($event, i)"
+          (paste)="onOtpPaste($event)"
+        >
+      </div>
+      <div class="resend-container">
+        <button type="button" (click)="resendOtp()" [ngClass]="{'animate-pulse': true}" [disabled]="isLoading">Resend OTP</button>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="submit-button"
+      [disabled]="(otpSent ? !isOtpValid() : !loginForm.valid) || isLoading"
+    >
+      <span *ngIf="!isLoading">{{ otpSent ? 'Verify OTP' : 'Send OTP' }}</span>
+      <span *ngIf="isLoading" class="spinner"></span>
+    </button>
+
+    <!-- Help text explaining what happens after verification -->
+    <div class="help-text" *ngIf="otpSent && !errorMessage">
+      After verification, existing users will be logged in automatically.
+      New users will be prompted to create an account.
+    </div>
+
+    <div class="social-login">
+      <div class="divider">
+        <span class="line"></span>
+        <span class="text">or continue with</span>
+        <span class="line"></span>
+      </div>
+      <div class="social-buttons">
+        <button type="button" class="social-btn">
+          <img src="assets/icons/social/facebook-circle.svg" alt="Facebook">
+        </button>
+        <button type="button" class="social-btn">
+          <img src="assets/icons/social/instagram-circle.svg" alt="Instagram">
+        </button>
+        <button type="button" class="social-btn">
+          <img src="assets/icons/social/whatsapp-circle.svg" alt="WhatsApp">
+        </button>
+        <button type="button" class="social-btn">
+          <img src="assets/icons/social/youtube-circle.svg" alt="YouTube">
+        </button>
+      </div>
+    </div>
+
+    <div class="terms-text">
+      By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+    </div>
+
+    <div class="register-link">
+      Don't have an account? <a routerLink="/signup">Sign Up</a>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,336 @@
+.delivery-areas-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 70px; // Space for the navbar
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    position: relative;
+    background-color: var(--surface-color, #f8f9fa); /* Theme-aware background */
+    padding: 20px;
+    border-radius: 8px;
+
+    h1 {
+      color: var(--text-color, #333); /* Theme-aware text color */
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      color: var(--text-secondary, #666); /* Theme-aware secondary text */
+      font-size: 16px;
+    }
+  }
+}
+
+// Delivery States Section
+.delivery-states-section {
+  margin-bottom: 40px;
+
+  .states-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+
+    .state-card {
+      background-color: var(--card-background, #fff); /* Theme-aware card background */
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px var(--shadow-color, rgba(0, 0, 0, 0.1)); /* Theme-aware shadow */
+      display: flex;
+      align-items: flex-start;
+      padding: 15px;
+
+      .state-icon {
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        mat-icon {
+          color: #ff5722;
+          font-size: 24px;
+          height: 24px;
+          width: 24px;
+        }
+      }
+
+      .state-details {
+        flex: 1;
+
+        .state-name-row, .state-charges-row {
+          display: flex;
+          margin-bottom: 8px;
+
+          .label {
+            width: 60px;
+            color: var(--text-secondary, #666); /* Theme-aware secondary text */
+            font-size: 14px;
+          }
+
+          .value {
+            font-weight: 500;
+            color: var(--text-color, #333); /* Theme-aware text color */
+            font-size: 14px;
+          }
+        }
+
+        .delivery-info {
+          margin-top: 10px;
+          font-size: 12px;
+          color: var(--text-secondary, #666); /* Theme-aware secondary text */
+          border-top: 1px solid var(--border-color, #eee); /* Theme-aware border */
+          padding-top: 8px;
+
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Locations Section
+.locations-section {
+  margin-bottom: 40px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-color, #333); /* Theme-aware text color */
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 30px;
+
+    .location-card {
+      background-color: var(--card-background, #fff); /* Theme-aware card background */
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px var(--shadow-color, rgba(0, 0, 0, 0.1)); /* Theme-aware shadow */
+
+      .location-header {
+        background-color: var(--surface-color, #f8f9fa); /* Theme-aware surface color */
+        display: flex;
+        align-items: center;
+        padding: 15px;
+
+        .location-icon {
+          margin-right: 15px;
+
+          mat-icon {
+            color: #ff5722;
+            font-size: 24px;
+            height: 24px;
+            width: 24px;
+          }
+        }
+
+        .location-title {
+          h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color, #333); /* Theme-aware text color */
+          }
+
+          .pickup-badge {
+            display: inline-block;
+            background-color: #ff5722;
+            color: white;
+            border-radius: 12px;
+            padding: 2px 8px;
+            font-size: 12px;
+            margin-top: 5px;
+          }
+        }
+      }
+
+      .location-details {
+        padding: 15px;
+
+        .detail-row {
+          display: flex;
+          margin-bottom: 8px;
+
+          .label {
+            width: 80px;
+            color: #666;
+            font-size: 14px;
+          }
+
+          .value {
+            flex: 1;
+            color: #333;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .hours-section {
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #eee;
+
+        .hours-row {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 8px;
+
+          .day {
+            color: #666;
+            font-size: 14px;
+          }
+
+          .time {
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Info Section
+.info-section {
+  margin-top: 40px;
+  text-align: center;
+  padding: 30px;
+  background-color: #f9f9f9;
+  background-image: linear-gradient(to bottom right, rgba(156, 89, 190, 0.05), rgba(37, 211, 102, 0.05));
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(156, 89, 190, 0.1);
+
+  h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 16px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    .contact-option {
+      display: flex;
+      align-items: center;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      &:nth-child(1) {
+        background-color: #9c59be; /* Purple brand color for Email */
+        color: white;
+
+        &:hover {
+          background-color: #8a56ac;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(156, 89, 190, 0.4);
+        }
+
+        .icon {
+          margin-right: 8px;
+          font-size: 18px;
+        }
+      }
+
+      &:nth-child(2) {
+        background-color: #25D366; /* WhatsApp green color */
+        color: white;
+
+        &:hover {
+          background-color: #20BD5C;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
+          filter: brightness(0) invert(1); /* Make the SVG icon white */
+        }
+      }
+    }
+  }
+}
+
+// Media queries for responsiveness
+@media (max-width: 768px) {
+  .delivery-areas-container {
+    padding: 15px;
+  }
+
+  .delivery-states-section {
+    .states-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .locations-section {
+    .locations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-options {
+    flex-direction: column;
+    gap: 15px;
+
+    .contact-option {
+      width: 80%;
+      max-width: 250px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+  }
+}
+
+// Small mobile screens
+@media (max-width: 480px) {
+  .location-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+
+    .location-icon {
+      margin-bottom: 10px;
+    }
+  }
+
+  .detail-row {
+    flex-direction: column;
+
+    .label {
+      width: 100% !important;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+  }
+}

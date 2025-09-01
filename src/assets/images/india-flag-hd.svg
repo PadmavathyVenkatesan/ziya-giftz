@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background rectangle with rounded corners -->
+  <rect width="24" height="18" rx="2" fill="white"/>
+  
+  <!-- Saffron top band -->
+  <rect y="0" width="24" height="6" fill="#FF9933"/>
+  
+  <!-- White middle band -->
+  <rect y="6" width="24" height="6" fill="white"/>
+  
+  <!-- Green bottom band -->
+  <rect y="12" width="24" height="6" fill="#138808"/>
+  
+  <!-- Ashoka Chakra -->
+  <circle cx="12" cy="9" r="3" fill="#000080"/>
+  <circle cx="12" cy="9" r="2.5" fill="white"/>
+  <circle cx="12" cy="9" r="0.5" fill="#000080"/>
+  
+  <!-- 24 spokes of the Ashoka Chakra -->
+  <g stroke="#000080" stroke-width="0.3">
+    <!-- Vertical and horizontal spokes -->
+    <line x1="12" y1="6" x2="12" y2="12"/>
+    <line x1="9" y1="9" x2="15" y2="9"/>
+    
+    <!-- Diagonal spokes -->
+    <line x1="10.05" y1="7.05" x2="13.95" y2="10.95"/>
+    <line x1="10.05" y1="10.95" x2="13.95" y2="7.05"/>
+    
+    <!-- Additional spokes for a more detailed Chakra -->
+    <line x1="10.7" y1="6.3" x2="13.3" y2="11.7"/>
+    <line x1="10.7" y1="11.7" x2="13.3" y2="6.3"/>
+    <line x1="9.3" y1="7.7" x2="14.7" y2="10.3"/>
+    <line x1="9.3" y1="10.3" x2="14.7" y2="7.7"/>
+  </g>
+</svg>

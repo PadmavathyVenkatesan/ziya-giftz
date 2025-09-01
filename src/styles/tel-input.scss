@@ -1,0 +1,192 @@
+/* Global styles for intl-tel-input to match the clean UI in the screenshot */
+.iti {
+  width: 100% !important;
+  display: block !important;
+}
+
+/* Flag container styling */
+.iti__flag-container {
+  z-index: 5 !important;
+  border-right: 1px solid #e0e0e0 !important;
+}
+
+.iti__flag-container:hover {
+  cursor: pointer !important;
+}
+
+/* Selected flag styling */
+.iti__selected-flag {
+  padding: 0 10px !important;
+  background-color: white !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  border-right: 1px solid #ddd !important;
+}
+
+.iti__selected-dial-code {
+  font-size: 15px !important;
+  color: #333 !important;
+  font-weight: 400 !important;
+  margin-left: 5px !important;
+}
+
+.iti__arrow {
+  border-left: 4px solid transparent !important;
+  border-right: 4px solid transparent !important;
+  border-top: 5px solid #666 !important;
+  margin-left: 5px !important;
+  opacity: 0.7 !important;
+}
+
+/* Country list styling */
+.iti__country-list {
+  width: 300px !important;
+  max-width: 90vw !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 4px !important;
+  border: 1px solid #ddd !important;
+  margin-top: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  z-index: 999 !important;
+  position: absolute !important;
+  left: 0 !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
+  background-color: white !important;
+}
+
+/* Search container */
+.iti__search-container {
+  padding: 10px !important;
+  border-bottom: 1px solid #eee !important;
+}
+
+.iti__search-input {
+  width: 100% !important;
+  padding: 10px 12px !important;
+  border: 1px solid #ddd !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  outline: none !important;
+}
+
+.iti__search-input:focus {
+  border-color: #9c59be !important;
+  box-shadow: 0 0 0 2px rgba(156, 89, 190, 0.1) !important;
+}
+
+/* Country items */
+.iti__country {
+  padding: 10px 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  transition: background-color 0.2s !important;
+  height: 36px !important;
+  box-sizing: border-box !important;
+}
+
+.iti__country:hover {
+  background-color: #f5f5f5 !important;
+}
+
+.iti__country.iti__highlight {
+  background-color: #f0f0f0 !important;
+}
+
+.iti__flag-box {
+  margin-right: 10px !important;
+}
+
+.iti__country-name {
+  font-size: 14px !important;
+  margin-right: 6px !important;
+  color: #333 !important;
+  flex: 1 !important;
+}
+
+.iti__dial-code {
+  color: #666 !important;
+  font-size: 13px !important;
+  text-align: right !important;
+  min-width: 45px !important;
+}
+
+/* Input styling */
+.iti input {
+  border-radius: 8px !important;
+  height: 50px !important;
+  font-size: 15px !important;
+  padding-left: 90px !important;
+  background-color: white !important;
+  border-color: #ddd !important;
+  color: #333 !important;
+}
+
+/* Form field with iti */
+.iti--allow-dropdown input, 
+.iti--allow-dropdown input[type=text],
+.iti--allow-dropdown input[type=tel] {
+  padding-left: 90px !important;
+  border-radius: 8px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  height: 50px !important;
+  font-size: 15px !important;
+  color: #333 !important;
+}
+
+/* Error styling */
+.iti.iti--invalid input {
+  border-color: #ff0000 !important;
+}
+
+/* Focus styles */
+.iti input:focus {
+  outline: none !important;
+  border-color: #ddd !important;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.iti--separate-dial-code .iti__selected-flag {
+  background-color: white !important;
+  border-radius: 8px 0 0 8px !important;
+}
+
+/* Mobile styles */
+@media (max-width: 576px) {
+  .iti__country-list {
+    left: 50% !important;
+    right: auto !important;
+    width: 280px !important;
+    max-width: 90vw !important;
+    margin-left: -140px !important;
+    max-height: 280px !important;
+  }
+  
+  .iti__search-input {
+    padding: 8px 10px !important;
+    font-size: 14px !important;
+  }
+  
+  .iti__country {
+    padding: 8px 12px !important;
+  }
+  
+  .iti__country-name {
+    font-size: 13px !important;
+    max-width: 160px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  
+  .iti__dial-code {
+    font-size: 12px !important;
+  }
+  
+  /* Make sure input has proper height on mobile */
+  .iti input {
+    height: 46px !important;
+  }
+}

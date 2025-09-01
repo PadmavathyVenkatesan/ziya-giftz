@@ -1,0 +1,164 @@
+<app-minimum-order-banner [minimumAmount]="minimumOrderAmount" [showPromotional]="true"></app-minimum-order-banner>
+<div class="delivery-areas-container">
+  <div class="page-header">
+    <h1>Delivery Areas</h1>
+    <p class="subtitle">Check if we deliver to your area</p>
+  </div>
+
+  <!-- Delivery States Section -->
+  <div class="delivery-states-section">
+    <div class="states-grid">
+      @for (state of deliveryStates; track state.state) {
+        <div class="state-card">
+          <div class="state-icon">
+            <mat-icon>location_on</mat-icon>
+          </div>
+          <div class="state-details">
+            <div class="state-name-row">
+              <span class="label">State</span>
+              <span class="value">{{state.name}}</span>
+            </div>
+            <div class="state-charges-row">
+              <span class="label">Charges</span>
+              <span class="value">{{state.charges}}</span>
+            </div>
+            <div class="delivery-info">
+              <p>Free Delivery if order above ₹{{state.minOrderValue}}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Our Locations Section -->
+  <div class="locations-section">
+    <h2>Our Locations</h2>
+
+    <div class="locations-grid">
+      @for (location of pickupLocations; track location.type) {
+        <div class="location-card">
+          <div class="location-header">
+            <div class="location-icon">
+              <mat-icon>store</mat-icon>
+            </div>
+            <div class="location-title">
+              <h3>{{location.type}}</h3>
+              <span class="pickup-badge">{{location.pointType}}</span>
+            </div>
+          </div>
+
+          <div class="location-details">
+            <div class="detail-row">
+              <span class="label">Address</span>
+              <span class="value">{{location.address}}</span>
+            </div>
+
+            @if (location.address2) {
+              <div class="detail-row">
+                <span class="label">Address 2</span>
+                <span class="value">{{location.address2}}</span>
+              </div>
+            }
+
+            <div class="detail-row">
+              <span class="label">City</span>
+              <span class="value">{{location.city}}</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Postal Code</span>
+              <span class="value">{{location.postalCode}}</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">State</span>
+              <span class="value">{{location.state}}</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Country</span>
+              <span class="value">{{location.country}}</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Phone</span>
+              <span class="value">{{location.phone}}</span>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Email</span>
+              <span class="value">{{location.email}}</span>
+            </div>
+          </div>
+
+          <div class="hours-section">
+            @if (location.hours.monday) {
+              <div class="hours-row">
+                <span class="day">Monday</span>
+                <span class="time">{{location.hours.monday.open}} - {{location.hours.monday.close}}</span>
+              </div>
+            }
+
+            @if (location.hours.tuesday) {
+              <div class="hours-row">
+                <span class="day">Tuesday</span>
+                <span class="time">{{location.hours.tuesday.open}} - {{location.hours.tuesday.close}}</span>
+              </div>
+            }
+
+            @if (location.hours.wednesday) {
+              <div class="hours-row">
+                <span class="day">Wednesday</span>
+                <span class="time">{{location.hours.wednesday.open}} - {{location.hours.wednesday.close}}</span>
+              </div>
+            }
+
+            @if (location.hours.thursday) {
+              <div class="hours-row">
+                <span class="day">Thursday</span>
+                <span class="time">{{location.hours.thursday.open}} - {{location.hours.thursday.close}}</span>
+              </div>
+            }
+
+            @if (location.hours.friday) {
+              <div class="hours-row">
+                <span class="day">Friday</span>
+                <span class="time">{{location.hours.friday.open}} - {{location.hours.friday.close}}</span>
+              </div>
+            }
+
+            @if (location.hours.saturday) {
+              <div class="hours-row">
+                <span class="day">Saturday</span>
+                <span class="time">{{location.hours.saturday.open}} - {{location.hours.saturday.close}}</span>
+              </div>
+            }
+
+            @if (location.hours.sunday) {
+              <div class="hours-row">
+                <span class="day">Sunday</span>
+                <span class="time">{{location.hours.sunday.open}} - {{location.hours.sunday.close}}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="info-section">
+    <h3>Don't see your area?</h3>
+    <p>We're constantly expanding! Contact us to check if we can make an exception for your location.</p>
+    <div class="contact-options">
+      <a href="mailto:support@ziyagiftz.in" class="contact-option">
+        <span class="icon">✉️</span>
+        <span>Email us</span>
+      </a>
+      <a href="https://wa.me/919876543210" class="contact-option">
+        <img src="assets/icons/whatsapp.svg" alt="WhatsApp" class="whatsapp-icon">
+        <span>WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</div>

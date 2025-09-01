@@ -1,0 +1,349 @@
+/* Enhanced Global Theme System with CSS Variables */
+
+/* Root Variables - Default Theme Base */
+:root {
+  /* Default Theme Variables */
+  --primary-color: #9c59be;
+  --primary-light: rgba(156, 89, 190, 0.1);
+  --primary-shadow: rgba(156, 89, 190, 0.3);
+  --secondary-color: #764ba2;
+  --accent-color: #ffd700;
+
+  --background-color: #ffffff;
+  --surface-color: #f8f9fa;
+  --card-background: #ffffff;
+  --navbar-background: linear-gradient(135deg, #9c59be 0%, #764ba2 100%);
+
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --text-inverse: #ffffff;
+
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-light: rgba(0, 0, 0, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
+
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --info-color: #3b82f6;
+
+  --danger-light: rgba(239, 68, 68, 0.1);
+  --danger-background: rgba(239, 68, 68, 0.05);
+
+  /* Button Variables */
+  --btn-primary-bg: var(--primary-color);
+  --btn-primary-text: white;
+  --btn-secondary-bg: var(--surface-color);
+  --btn-secondary-text: var(--text-primary);
+
+  /* Font Variables */
+  --font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-weight: 400;
+  --letter-spacing: 0;
+
+  /* Spacing & Sizing */
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* ================== DEFAULT THEME ================== */
+.theme-default,
+body.theme-default,
+html[data-theme="default"] {
+  --primary-color: #9c59be !important;
+  --primary-light: rgba(156, 89, 190, 0.1) !important;
+  --primary-shadow: rgba(156, 89, 190, 0.3) !important;
+  --secondary-color: #764ba2 !important;
+  --accent-color: #ffd700 !important;
+
+  --background-color: #ffffff !important;
+  --surface-color: #f8f9fa !important;
+  --card-background: #ffffff !important;
+  --navbar-background: linear-gradient(135deg, #9c59be 0%, #764ba2 100%) !important;
+
+  --text-primary: #1f2937 !important;
+  --text-secondary: #6b7280 !important;
+  --text-muted: #9ca3af !important;
+  --text-inverse: #ffffff !important;
+
+  --border-color: rgba(0, 0, 0, 0.1) !important;
+  --border-light: rgba(0, 0, 0, 0.05) !important;
+  --shadow-color: rgba(0, 0, 0, 0.1) !important;
+  --shadow-hover: rgba(0, 0, 0, 0.15) !important;
+
+  --btn-primary-bg: #9c59be !important;
+  --btn-primary-text: white !important;
+  --btn-secondary-bg: #f8f9fa !important;
+  --btn-secondary-text: #1f2937 !important;
+}
+
+/* ================== DARK THEME ================== */
+.theme-dark,
+body.theme-dark,
+html[data-theme="dark"] {
+  --primary-color: #a855f7 !important;
+  --primary-light: rgba(168, 85, 247, 0.2) !important;
+  --primary-shadow: rgba(168, 85, 247, 0.4) !important;
+  --secondary-color: #7c3aed !important;
+  --accent-color: #fbbf24 !important;
+
+  --background-color: #0f172a !important;
+  --surface-color: #1e293b !important;
+  --card-background: #334155 !important;
+  --navbar-background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+
+  --text-primary: #f1f5f9 !important;
+  --text-secondary: #cbd5e1 !important;
+  --text-muted: #94a3b8 !important;
+  --text-inverse: #0f172a !important;
+
+  --border-color: rgba(255, 255, 255, 0.1) !important;
+  --border-light: rgba(255, 255, 255, 0.05) !important;
+  --shadow-color: rgba(0, 0, 0, 0.3) !important;
+  --shadow-hover: rgba(0, 0, 0, 0.4) !important;
+
+  --btn-primary-bg: #a855f7 !important;
+  --btn-primary-text: white !important;
+  --btn-secondary-bg: #334155 !important;
+  --btn-secondary-text: #f1f5f9 !important;
+
+  /* Dark theme specific overrides */
+  --success-color: #22c55e !important;
+  --warning-color: #fbbf24 !important;
+  --danger-color: #f87171 !important;
+  --info-color: #60a5fa !important;
+}
+
+/* ================== COLORFUL THEME ================== */
+.theme-colorful,
+body.theme-colorful,
+html[data-theme="colorful"] {
+  --primary-color: #ff4757 !important;
+  --primary-light: rgba(255, 71, 87, 0.15) !important;
+  --primary-shadow: rgba(255, 71, 87, 0.4) !important;
+  --secondary-color: #ff3742 !important;
+  --accent-color: #ffa502 !important;
+
+  --background-color: #fff5f5 !important;
+  --surface-color: #fef2f2 !important;
+  --card-background: #ffffff !important;
+  --navbar-background: linear-gradient(135deg, #ff4757 0%, #ff6b7a 100%) !important;
+
+  --text-primary: #2d3436 !important;
+  --text-secondary: #636e72 !important;
+  --text-muted: #95a5a6 !important;
+  --text-inverse: #ffffff !important;
+
+  --border-color: rgba(255, 71, 87, 0.2) !important;
+  --border-light: rgba(255, 71, 87, 0.1) !important;
+  --shadow-color: rgba(255, 71, 87, 0.15) !important;
+  --shadow-hover: rgba(255, 71, 87, 0.25) !important;
+
+  --btn-primary-bg: #ff4757 !important;
+  --btn-primary-text: white !important;
+  --btn-secondary-bg: #fef2f2 !important;
+  --btn-secondary-text: #2d3436 !important;
+
+  /* Colorful theme specific overrides */
+  --success-color: #00b894 !important;
+  --warning-color: #fdcb6e !important;
+  --danger-color: #e17055 !important;
+  --info-color: #74b9ff !important;
+}
+
+/* ================== MINIMAL THEME ================== */
+.theme-minimal,
+body.theme-minimal,
+html[data-theme="minimal"] {
+  --primary-color: #6b7280 !important;
+  --primary-light: rgba(107, 114, 128, 0.1) !important;
+  --primary-shadow: rgba(107, 114, 128, 0.2) !important;
+  --secondary-color: #4b5563 !important;
+  --accent-color: #f59e0b !important;
+
+  --background-color: #fafafa !important;
+  --surface-color: #f5f5f5 !important;
+  --card-background: #ffffff !important;
+  --navbar-background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%) !important;
+
+  --text-primary: #111827 !important;
+  --text-secondary: #4b5563 !important;
+  --text-muted: #9ca3af !important;
+  --text-inverse: #ffffff !important;
+
+  --border-color: rgba(0, 0, 0, 0.08) !important;
+  --border-light: rgba(0, 0, 0, 0.04) !important;
+  --shadow-color: rgba(0, 0, 0, 0.08) !important;
+  --shadow-hover: rgba(0, 0, 0, 0.12) !important;
+
+  --btn-primary-bg: #6b7280 !important;
+  --btn-primary-text: white !important;
+  --btn-secondary-bg: #f5f5f5 !important;
+  --btn-secondary-text: #111827 !important;
+
+  /* Minimal theme specific overrides */
+  --success-color: #059669 !important;
+  --warning-color: #d97706 !important;
+  --danger-color: #dc2626 !important;
+  --info-color: #2563eb !important;
+}
+
+/* ================== GLOBAL COMPONENT STYLES ================== */
+
+/* Body and HTML Theme Application */
+body {
+  background-color: var(--background-color) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-family) !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure smooth transitions for all themed elements */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Bootstrap Component Overrides */
+.btn {
+  &.btn-primary {
+    background-color: var(--btn-primary-bg) !important;
+    border-color: var(--btn-primary-bg) !important;
+    color: var(--btn-primary-text) !important;
+
+    &:hover {
+      background-color: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+      filter: brightness(1.1);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: var(--btn-secondary-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--btn-secondary-text) !important;
+
+    &:hover {
+      background-color: var(--surface-color) !important;
+      border-color: var(--primary-color) !important;
+    }
+  }
+}
+
+/* Card Components */
+.card {
+  background-color: var(--card-background) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+
+  .card-header {
+    background-color: var(--surface-color) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+  }
+
+  .card-footer {
+    background-color: var(--surface-color) !important;
+    border-top: 1px solid var(--border-color) !important;
+  }
+}
+
+/* Form Controls */
+.form-control {
+  background-color: var(--card-background) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+
+  &:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 0.2rem var(--primary-light) !important;
+  }
+
+  &::placeholder {
+    color: var(--text-muted) !important;
+  }
+}
+
+/* Modal Components */
+.modal {
+  .modal-content {
+    background-color: var(--card-background) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid var(--border-color) !important;
+  }
+
+  .modal-footer {
+    border-top: 1px solid var(--border-color) !important;
+  }
+}
+
+/* Navigation Components */
+.navbar {
+  background: var(--navbar-background) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+
+  .navbar-brand,
+  .nav-link {
+    color: var(--text-inverse) !important;
+
+    &:hover {
+      color: var(--accent-color) !important;
+    }
+  }
+}
+
+/* Table Components */
+.table {
+  color: var(--text-primary) !important;
+
+  th {
+    background-color: var(--surface-color) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+  }
+
+  td {
+    border-color: var(--border-light) !important;
+  }
+
+  &.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--surface-color) !important;
+  }
+}
+
+/* Alert Components */
+.alert {
+  &.alert-success {
+    background-color: var(--success-color) !important;
+    border-color: var(--success-color) !important;
+    color: white !important;
+  }
+
+  &.alert-warning {
+    background-color: var(--warning-color) !important;
+    border-color: var(--warning-color) !important;
+    color: white !important;
+  }
+
+  &.alert-danger {
+    background-color: var(--danger-color) !important;
+    border-color: var(--danger-color) !important;
+    color: white !important;
+  }
+
+  &.alert-info {
+    background-color: var(--info-color) !important;
+    border-color: var(--info-color) !important;
+    color: white !important;
+  }
+}

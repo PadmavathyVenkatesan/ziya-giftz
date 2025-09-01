@@ -1,0 +1,14 @@
+<div class="minimum-order-banner" [@slideIn]>
+  <div class="banner-container" [@pulseAnimation]="pulseState">
+    <div class="banner-content" *ngIf="!showPromotional">
+      <p>Minimum Order Amount is <span class="price-amount">₹{{minimumAmount}}</span></p>
+    </div>
+    <div class="banner-content promotional" *ngIf="showPromotional">
+      <div class="promo-message">{{currentMessage}}</div>
+      <button class="shop-now-btn" routerLink="/home">
+        <span>Shop Now</span>
+        <img src="assets/icons/gift-icon.svg" alt="Gift" class="btn-icon">
+      </button>
+    </div>
+  </div>
+</div>

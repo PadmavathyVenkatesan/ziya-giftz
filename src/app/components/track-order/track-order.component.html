@@ -1,0 +1,104 @@
+<div class="track-order-container">
+  <div class="track-header">
+    <h2>Track Your Order</h2>
+    <p>To track your order, enter your order ID or invoice number below.</p>
+  </div>
+
+  <!-- Track Form -->
+  <div class="track-form-container" *ngIf="!trackingSubmitted">
+    <div class="track-form-box">
+      <div class="order-id-section">
+        <h3>Order ID/Invoice Number</h3>
+        <form [formGroup]="trackForm" (ngSubmit)="trackOrder()" class="track-form">
+          <div class="input-container">
+            <input
+              type="text"
+              formControlName="orderNumber"
+              placeholder="Enter your order id"
+              class="order-input"
+            >
+            <div class="error-message" *ngIf="trackForm.get('orderNumber')?.invalid && trackForm.get('orderNumber')?.touched">
+              Please enter a valid order number
+            </div>
+          </div>
+          <button type="submit" class="track-button" [disabled]="trackForm.invalid">
+            Track Order
+            <span class="arrow-icon">→</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="trackingSubmitted && !orderFound">
+    <div class="spinner"></div>
+    <p>Looking up your order...</p>
+  </div>
+
+  <!-- Order Details -->
+  <div class="order-details" *ngIf="orderFound && currentOrder">
+    <div class="order-info">
+      <div class="order-id">
+        <span class="label">Order Number:</span>
+        <span class="value">{{currentOrder.orderNumber}}</span>
+      </div>
+      <div class="order-date">
+        <span class="label">Ordered On:</span>
+        <span class="value">{{formatDate(currentOrder.orderDate)}}</span>
+      </div>
+      <div class="expected-delivery">
+        <span class="label">Expected Delivery:</span>
+        <span class="value highlight">{{formatDate(currentOrder.estimatedDelivery || currentOrder.orderDate)}}</span>
+      </div>
+    </div>
+
+    <!-- Order Status -->
+    <div class="order-status">
+      <h3>Order Status</h3>
+      <div class="status-info">
+        <div class="status-badge" [style.background-color]="getOrderStatusInfo(currentOrder.status).color">
+          <mat-icon>{{getOrderStatusInfo(currentOrder.status).icon}}</mat-icon>
+          <span>{{getOrderStatusInfo(currentOrder.status).text}}</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress" [style.width.%]="getStatusProgress(currentOrder.status)"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Items -->
+    <div class="order-items">
+      <h3>Items in your order</h3>
+      <div class="item" *ngFor="let item of currentOrder.items">
+        <img [src]="item.image || 'assets/images/placeholder.png'" [alt]="item.name" class="item-image">
+        <div class="item-details">
+          <div class="item-name">{{item.name}}</div>
+          <div class="item-quantity">Qty: {{item.quantity}}</div>
+          <div class="item-price">₹{{item.price}}</div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Shipping Address -->
+    <div class="shipping-address" *ngIf="currentOrder">
+      <h3>Shipping Address</h3>
+      <div class="address-details">
+        <div class="name">{{currentOrder.shippingAddress.name}}</div>
+        <div class="address">{{currentOrder.shippingAddress.addressLine1}}</div>
+        <div class="city-pin">{{currentOrder.shippingAddress.city}}, {{currentOrder.shippingAddress.pincode}}</div>
+        <div class="phone">{{currentOrder.shippingAddress.phone}}</div>
+      </div>
+    </div>
+
+    <!-- Contact Support -->
+    <div class="contact-support">
+      <p>Need help with this order?</p>
+      <button class="contact-button">Contact Support</button>
+    </div>
+  </div>
+
+
+</div>

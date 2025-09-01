@@ -1,0 +1,22 @@
+<div class="top-navbar">
+  <!-- Logo and brand area -->
+  <div class="brand-section">
+    <a routerLink="/" class="logo-container">
+      <img src="assets/logos/padma-giftz-logo.svg" alt="Padma Giftz" class="logo">
+    </a>
+  </div>
+
+  <!-- Search Area -->
+  <div class="search-box">
+    <input type="text" placeholder="Search for gifts..." [formControl]="searchControl">
+    <button class="search-btn" (click)="search(searchControl.value || '')">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+
+  <!-- Wishlist Icon -->
+  <div class="wishlist-icon" (click)="navigateTo('wishlist')">
+    <mat-icon>favorite_border</mat-icon>
+    <div class="wishlist-badge" *ngIf="wishlistItemCount > 0">{{ wishlistItemCount }}</div>
+  </div>
+</div>

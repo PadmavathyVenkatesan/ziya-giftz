@@ -1,0 +1,45 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6739B6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9C27B0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="giftBoxGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Gift box icon -->
+  <g transform="translate(10, 12)">
+    <!-- Box base -->
+    <rect x="0" y="16" width="24" height="20" fill="url(#giftBoxGradient)" rx="2"/>
+    <!-- Box lid -->
+    <rect x="0" y="12" width="24" height="8" fill="#FF6B6B" rx="2"/>
+    <!-- Ribbon vertical -->
+    <rect x="10" y="8" width="4" height="28" fill="#E53E3E"/>
+    <!-- Ribbon horizontal -->
+    <rect x="-2" y="18" width="28" height="4" fill="#E53E3E"/>
+    <!-- Bow -->
+    <path d="M8 8 Q12 4 16 8 Q12 12 8 8" fill="#C53030"/>
+    <path d="M16 8 Q12 4 8 8 Q12 12 16 8" fill="#C53030"/>
+    <!-- Bow center -->
+    <circle cx="12" cy="8" r="2" fill="#9B2C2C"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="45" y="25" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="url(#logoGradient)">
+    Padma
+  </text>
+  <text x="45" y="45" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="url(#logoGradient)">
+    Giftz
+  </text>
+  
+  <!-- Decorative stars -->
+  <g fill="#FFD700" opacity="0.8">
+    <path d="M140 15 L142 20 L147 20 L143 23 L145 28 L140 25 L135 28 L137 23 L133 20 L138 20 Z" transform="scale(0.5)"/>
+    <path d="M160 35 L162 40 L167 40 L163 43 L165 48 L160 45 L155 48 L157 43 L153 40 L158 40 Z" transform="scale(0.4)"/>
+    <path d="M180 20 L182 25 L187 25 L183 28 L185 33 L180 30 L175 33 L177 28 L173 25 L178 25 Z" transform="scale(0.3)"/>
+  </g>
+</svg>
