@@ -5,11 +5,21 @@
   --text: #111827;
   --card-bg: #f9fafb;
   --button-bg: #6C63FF;
+  --button-bg-rgb: 108, 99, 255;
   --button-text: #ffffff;
   --nav-active: #6C63FF;
-  
+
+  /* Primary color variations for button states */
+  --primary-color: #6C63FF;
+  --primary-rgb: 108, 99, 255;
+  --primary-500: #6C63FF;
+  --primary-600: #5b54e6;
+  --primary-700: #4c46cc;
+  --primary-contrast: #ffffff;
+
   /* Additional variables for comprehensive theming */
   --border: #e5e7eb;
+  --border-rgb: 229, 231, 235;
   --hover: #f3f4f6;
   --shadow: rgba(0, 0, 0, 0.1);
   --accent: #4f46e5;
@@ -24,11 +34,21 @@
   --text: #EAEAEA;
   --card-bg: #1E1E1E;
   --button-bg: #BB86FC;
+  --button-bg-rgb: 187, 134, 252;
   --button-text: #111827;
   --nav-active: #BB86FC;
-  
+
+  /* Primary color variations for button states */
+  --primary-color: #BB86FC;
+  --primary-rgb: 187, 134, 252;
+  --primary-500: #BB86FC;
+  --primary-600: #a573e3;
+  --primary-700: #9061ca;
+  --primary-contrast: #111827;
+
   /* Additional variables for comprehensive theming */
   --border: #374151;
+  --border-rgb: 55, 65, 81;
   --hover: #2d2d2d;
   --shadow: rgba(0, 0, 0, 0.3);
   --accent: #a855f7;
@@ -43,11 +63,21 @@
   --text: #1F2937;
   --card-bg: #ffffff;
   --button-bg: #D1D5DB;
+  --button-bg-rgb: 209, 213, 219;
   --button-text: #111827;
   --nav-active: #4B5563;
-  
+
+  /* Primary color variations for button states */
+  --primary-color: #4B5563;
+  --primary-rgb: 75, 85, 99;
+  --primary-500: #4B5563;
+  --primary-600: #3f4651;
+  --primary-700: #333840;
+  --primary-contrast: #ffffff;
+
   /* Additional variables for comprehensive theming */
   --border: #d1d5db;
+  --border-rgb: 209, 213, 219;
   --hover: #f9fafb;
   --shadow: rgba(0, 0, 0, 0.05);
   --accent: #6b7280;
@@ -61,22 +91,30 @@
   --bg: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
   --text: #111827;
   --card-bg: #ffffff;
-  --button-bg: #FF6B6B;
-  --button-text: #ffffff;
-  --nav-active: #FF6B6B;
-  
+  --button-bg: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+  --button-bg-rgb: 255, 222, 233; /* RGB for #FFDEE9 (primary color in gradient) */
+  --button-text: #111827;
+  --nav-active: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+
+  /* Primary color variations for button states */
+  --primary-color: #ec4899;
+  --primary-rgb: 236, 72, 153;
+  --primary-500: #ec4899;
+  --primary-600: #db2777;
+  --primary-700: #be185d;
+  --primary-contrast: #ffffff;
+
   /* Additional variables for comprehensive theming */
   --border: #fbbf24;
+  --border-rgb: 251, 191, 36;
   --hover: #fef3c7;
-  --shadow: rgba(255, 107, 107, 0.2);
+  --shadow: rgba(255, 221, 233, 0.2);
   --accent: #ec4899;
   --muted: #6b7280;
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
-}
-
-/* Global styles using CSS variables */
+}/* Global styles using CSS variables */
 body {
   background: var(--bg);
   color: var(--text);
@@ -89,17 +127,17 @@ button:not(.unstyled) {
   background-color: var(--button-bg);
   color: var(--button-text);
   border: 1px solid var(--button-bg);
-  
+
   &:hover {
     opacity: 0.9;
     transform: translateY(-1px);
   }
-  
+
   &.btn-outline {
     background-color: transparent;
     color: var(--button-bg);
     border-color: var(--button-bg);
-    
+
     &:hover {
       background-color: var(--button-bg);
       color: var(--button-text);
@@ -115,7 +153,7 @@ app-product-card,
   background-color: var(--card-bg);
   border: 1px solid var(--border);
   box-shadow: 0 4px 6px var(--shadow);
-  
+
   &:hover {
     box-shadow: 0 8px 25px var(--shadow);
   }
@@ -128,17 +166,17 @@ app-product-card,
 .bottom-navigation {
   background-color: var(--card-bg);
   border-bottom: 1px solid var(--border);
-  
+
   .nav-link,
   .mat-tab-link {
     color: var(--text);
-    
+
     &.active,
     &.mat-tab-label-active {
       color: var(--nav-active);
       border-bottom-color: var(--nav-active);
     }
-    
+
     &:hover {
       background-color: var(--hover);
     }
@@ -151,7 +189,7 @@ app-product-card,
   background-color: var(--card-bg);
   border-color: var(--border);
   color: var(--text);
-  
+
   &:focus {
     border-color: var(--nav-active);
     box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);

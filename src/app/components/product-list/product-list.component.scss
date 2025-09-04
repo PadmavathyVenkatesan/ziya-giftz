@@ -291,8 +291,8 @@
       gap: 8px;
       margin-bottom: 12px;
       padding: 10px 0;
-      border-top: 1px solid #f0f0f0;
-      border-bottom: 1px solid #f0f0f0;
+      border-top: 1px solid rgba(var(--border-rgb, 229, 231, 235), 0.3);
+      border-bottom: 1px solid rgba(var(--border-rgb, 229, 231, 235), 0.3);
       min-height: 110px; /* Ensure consistent height for all cards */
 
       .feature-item {
@@ -304,13 +304,14 @@
           width: 18px;
           height: 18px;
           object-fit: contain;
-          opacity: 0.7;
+          opacity: 0.8;
         }
 
         .feature-text {
           font-size: 12px;
-          color: #555;
-          font-weight: 400;
+          color: var(--text-color) !important;
+          font-weight: 500;
+          opacity: 0.9;
         }
       }
     }
@@ -319,8 +320,8 @@
       width: 100%;
       padding: 12px;
       border: none;
-      background-color: #9c59be; /* Purple brand color to match image */
-      color: white;
+      background-color: var(--button-bg) !important; /* Use theme variable with !important */
+      color: var(--button-text) !important; /* Use theme variable with !important */
       border-radius: 8px;
       font-weight: 500;
       cursor: pointer;
@@ -328,8 +329,9 @@
       letter-spacing: 0.5px;
 
       &:hover {
-        background-color: #8a56ac; /* Darker purple on hover */
+        opacity: 0.9;
         transform: translateY(-1px);
+        filter: brightness(0.95);
       }
     }
 
@@ -347,8 +349,8 @@
         width: 40px;
         height: 25px;
         border: none;
-        background-color: #9c59be; /* Updated to match the purple brand color */
-        color: white;
+        background-color: var(--button-bg) !important; /* Use theme variable with !important */
+        color: var(--button-text) !important; /* Use theme variable with !important */
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
@@ -358,7 +360,8 @@
         transition: all 0.2s ease;
 
         &:hover {
-          background-color: #8a56ac; /* Darker shade */
+          opacity: 0.9;
+          filter: brightness(0.95);
         }
 
         &.minus {

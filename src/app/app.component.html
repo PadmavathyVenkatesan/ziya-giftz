@@ -1,40 +1,4 @@
 <div class="app-container animate-fade-in">
-  <!-- Theme Debug Test (temporary) -->
-  <div class="test-theme-vars" style="position: fixed; top: 10px; left: 10px; z-index: 9998; background: red; color: white; padding: 15px; border: 2px solid yellow; font-size: 12px; max-width: 250px;">
-    <h4>DEBUG PANEL</h4>
-    <div>Current: {{getCurrentDataTheme()}}</div>
-
-    <div style="margin: 10px 0;">
-      <strong>DIRECT DOM TESTS:</strong><br>
-      <button onclick="window.directThemeTest('dark')" style="margin: 2px; padding: 5px; background: black; color: white; border: none; cursor: pointer; font-size: 10px;">Direct Dark</button>
-      <button onclick="window.directThemeTest('default')" style="margin: 2px; padding: 5px; background: white; color: black; border: none; cursor: pointer; font-size: 10px;">Direct Default</button><br>
-      <button onclick="window.testCSSVariables()" style="margin: 2px; padding: 5px; background: blue; color: white; border: none; cursor: pointer; font-size: 10px;">Test CSS Vars</button>
-      <button onclick="window.forceThemeTest()" style="margin: 2px; padding: 5px; background: orange; border: none; cursor: pointer; font-size: 10px;">Force Test</button><br>
-      <button onclick="window.inspectDOM()" style="margin: 2px; padding: 5px; background: green; color: white; border: none; cursor: pointer; font-size: 10px;">Inspect DOM</button>
-      <button onclick="window.testCSSSelector()" style="margin: 2px; padding: 5px; background: teal; color: white; border: none; cursor: pointer; font-size: 10px;">Test CSS</button>
-    </div>
-
-    <div style="margin: 10px 0;">
-      <strong>FORCE ALL ELEMENTS:</strong><br>
-      <button onclick="window.forceAllElementsTheme('dark')" style="margin: 2px; padding: 5px; background: #121212; color: white; border: none; cursor: pointer; font-size: 10px;">Force All Dark</button>
-      <button onclick="window.forceAllElementsTheme('default')" style="margin: 2px; padding: 5px; background: #ffffff; color: black; border: 1px solid black; cursor: pointer; font-size: 10px;">Force All Light</button><br>
-      <button onclick="window.forceAllElementsTheme('colorful')" style="margin: 2px; padding: 5px; background: linear-gradient(45deg, #FF6B6B, #4ECDC4); color: white; border: none; cursor: pointer; font-size: 10px;">Force All Color</button>
-    </div>
-
-    <div style="margin: 10px 0;">
-      <strong>ULTIMATE FORCE:</strong><br>
-      <button onclick="window.ultimateThemeForce('dark')" style="margin: 2px; padding: 5px; background: #000000; color: white; border: none; cursor: pointer; font-size: 10px; font-weight: bold;">💀 ULTIMATE DARK</button>
-      <button onclick="window.ultimateThemeForce('default')" style="margin: 2px; padding: 5px; background: #ffffff; color: black; border: 2px solid black; cursor: pointer; font-size: 10px; font-weight: bold;">☀️ ULTIMATE LIGHT</button><br>
-      <button onclick="window.ultimateThemeForce('colorful')" style="margin: 2px; padding: 5px; background: #FF6B6B; color: white; border: none; cursor: pointer; font-size: 10px; font-weight: bold;">🌈 ULTIMATE COLOR</button>
-    </div>
-
-    <div style="margin: 10px 0;">
-      <strong>SERVICE TESTS:</strong><br>
-      <button (click)="testTheme('default')" style="margin: 2px; padding: 5px; background: gray; color: white; border: none; cursor: pointer; font-size: 10px;">Service Default</button>
-      <button (click)="testTheme('dark')" style="margin: 2px; padding: 5px; background: purple; color: white; border: none; cursor: pointer; font-size: 10px;">Service Dark</button>
-    </div>
-  </div>
-
   <!-- Top Navbar -->
   <app-top-navbar class="animate-slide-down"></app-top-navbar>  <main class="main-content animate-fade-in animate-delay-200">
     <router-outlet></router-outlet>
@@ -46,14 +10,17 @@
   <!-- Toast Notifications -->
   <app-toast class="animate-scale-in"></app-toast>
 
-  <!-- Theme Swapper Button -->
-  <app-floating-theme-button class="animate-scale-in animate-delay-500"></app-floating-theme-button>
+  <!-- Floating Buttons Stack -->
+  <div class="floating-buttons-stack">
+    <!-- Theme Swapper Button -->
+    <app-floating-theme-button class="animate-scale-in animate-delay-500"></app-floating-theme-button>
 
-  <!-- WhatsApp Contact Button -->
-  <a href="https://wa.me/918555032750" class="contact-floating-button animate-bounce animate-delay-600" target="_blank">
-    <button>
-      <i class="fa-brands fa-whatsapp"></i>
-    </button>
-    <span>WhatsApp</span>
-  </a>
+    <!-- WhatsApp Contact Button -->
+    <a href="https://wa.me/918555032750" class="contact-floating-button animate-bounce animate-delay-600" target="_blank">
+      <button>
+        <i class="fa-brands fa-whatsapp"></i>
+      </button>
+      <span>WhatsApp</span>
+    </a>
+  </div>
 </div>

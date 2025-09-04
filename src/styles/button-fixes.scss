@@ -1,0 +1,366 @@
+/* Global Button State Fixes - Ensures theme colors persist across all button interactions */
+
+/* Base button reset and theme integration */
+button,
+.btn,
+[role="button"] {
+  /* Remove default browser outline and focus styles */
+  outline: none !important;
+  border: none;
+
+  /* Ensure text decoration doesn't interfere */
+  text-decoration: none !important;
+
+  /* Base transition for all buttons */
+  transition: all 0.3s ease !important;
+
+  /* Prevent browser from applying default colors */
+  &:focus,
+  &:focus-visible,
+  &:focus-within {
+    outline: none !important;
+    text-decoration: none !important;
+
+    /* Apply theme-aware focus styling */
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 156, 89, 190), 0.3) !important;
+  }
+
+  &:active {
+    outline: none !important;
+    text-decoration: none !important;
+    transform: translateY(1px);
+  }
+
+  &:visited {
+    text-decoration: none !important;
+  }
+}
+
+/* Primary button styles - consistent across all themes */
+.btn-primary,
+button[class*="primary"],
+.primary-btn,
+.submit-button,
+.continue-button,
+.place-order-btn {
+  background: linear-gradient(135deg, var(--primary-color, #6C63FF), var(--primary-600, #5b54e6)) !important;
+  color: var(--primary-contrast, white) !important;
+  border: 2px solid var(--primary-color, #6C63FF) !important;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: linear-gradient(135deg, var(--primary-600, #5b54e6), var(--primary-700, #4c46cc)) !important;
+    color: var(--primary-contrast, white) !important;
+    border-color: var(--primary-600, #5b54e6) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb, 108, 99, 255), 0.4) !important;
+  }
+
+  &:active {
+    background: linear-gradient(135deg, var(--primary-700, #4c46cc), var(--primary-800, #3d37b3)) !important;
+    transform: translateY(0);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 108, 99, 255), 0.3) !important;
+  }
+
+  &:disabled {
+    background: var(--muted, #9ca3af) !important;
+    color: var(--muted-contrast, #6b7280) !important;
+    border-color: var(--muted, #9ca3af) !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Secondary button styles */
+.btn-secondary,
+.btn-outline-primary,
+.secondary-btn,
+.cancel-btn {
+  background: transparent !important;
+  color: var(--primary-color, #6C63FF) !important;
+  border: 2px solid var(--primary-color, #6C63FF) !important;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--primary-color, #6C63FF) !important;
+    color: var(--primary-contrast, white) !important;
+    border-color: var(--primary-color, #6C63FF) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb, 108, 99, 255), 0.3) !important;
+  }
+
+  &:active {
+    background: var(--primary-600, #5b54e6) !important;
+    transform: translateY(0);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 108, 99, 255), 0.3) !important;
+  }
+
+  &:disabled {
+    background: transparent !important;
+    color: var(--muted, #9ca3af) !important;
+    border-color: var(--muted, #9ca3af) !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Success button styles */
+.btn-success,
+.success-btn,
+.saved-info-badge {
+  background: linear-gradient(135deg, var(--success, #10b981), var(--success-600, #059669)) !important;
+  color: var(--success-contrast, white) !important;
+  border: 2px solid var(--success, #10b981) !important;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: linear-gradient(135deg, var(--success-600, #059669), var(--success-700, #047857)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--success-rgb, 16, 185, 129), 0.4) !important;
+  }
+
+  &:active {
+    background: linear-gradient(135deg, var(--success-700, #047857), var(--success-800, #065f46)) !important;
+    transform: translateY(0);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(var(--success-rgb, 16, 185, 129), 0.3) !important;
+  }
+}
+
+/* Danger button styles */
+.btn-danger,
+.danger-btn,
+.delete-btn {
+  background: linear-gradient(135deg, var(--error, #ef4444), var(--error-600, #dc2626)) !important;
+  color: var(--error-contrast, white) !important;
+  border: 2px solid var(--error, #ef4444) !important;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: linear-gradient(135deg, var(--error-600, #dc2626), var(--error-700, #b91c1c)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--error-rgb, 239, 68, 68), 0.4) !important;
+  }
+
+  &:active {
+    background: linear-gradient(135deg, var(--error-700, #b91c1c), var(--error-800, #991b1b)) !important;
+    transform: translateY(0);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(var(--error-rgb, 239, 68, 68), 0.3) !important;
+  }
+}
+
+/* Small button variant */
+.btn-sm,
+.small-btn {
+  padding: 8px 16px !important;
+  font-size: 0.875rem !important;
+}
+
+/* Large button variant */
+.btn-lg,
+.large-btn {
+  padding: 16px 32px !important;
+  font-size: 1.125rem !important;
+  border-radius: 12px !important;
+}
+
+/* Icon button styles */
+.btn-icon,
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.btn-lg {
+    width: 48px;
+    height: 48px;
+  }
+
+  &.btn-sm {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Secondary button state fixes */
+.btn-secondary,
+button[class*="secondary"] {
+  background: var(--surface-color, #f8f9fa) !important;
+  color: var(--text-color, #333) !important;
+  border-color: var(--border-color, #ddd) !important;
+
+  &:hover {
+    background: var(--surface-hover, #e9ecef) !important;
+    color: var(--text-color, #333) !important;
+    border-color: var(--primary-color, #9c59be) !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    background: var(--surface-color, #f8f9fa) !important;
+    color: var(--text-color, #333) !important;
+    border-color: var(--primary-color, #9c59be) !important;
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb, 156, 89, 190), 0.2) !important;
+  }
+
+  &:active {
+    background: var(--surface-active, #dee2e6) !important;
+    color: var(--text-color, #333) !important;
+    border-color: var(--primary-color, #9c59be) !important;
+  }
+
+  &:visited {
+    background: var(--surface-color, #f8f9fa) !important;
+    color: var(--text-color, #333) !important;
+    border-color: var(--border-color, #ddd) !important;
+  }
+}
+
+/* Outline button state fixes */
+.btn-outline-primary,
+button[class*="outline"] {
+  background: transparent !important;
+  color: var(--primary-color, #9c59be) !important;
+  border-color: var(--primary-color, #9c59be) !important;
+
+  &:hover {
+    background: var(--primary-color, #9c59be) !important;
+    color: var(--button-text-color, white) !important;
+    border-color: var(--primary-color, #9c59be) !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    background: transparent !important;
+    color: var(--primary-color, #9c59be) !important;
+    border-color: var(--primary-color, #9c59be) !important;
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb, 156, 89, 190), 0.25) !important;
+  }
+
+  &:active {
+    background: var(--primary-color, #9c59be) !important;
+    color: var(--button-text-color, white) !important;
+    border-color: var(--primary-color, #9c59be) !important;
+  }
+
+  &:visited {
+    background: transparent !important;
+    color: var(--primary-color, #9c59be) !important;
+    border-color: var(--primary-color, #9c59be) !important;
+  }
+}
+
+/* Disabled state should override all other states */
+button:disabled,
+.btn:disabled,
+button[disabled],
+.btn[disabled] {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
+    opacity: 0.6 !important;
+    transform: none !important;
+  }
+}
+
+/* Material Design button fixes */
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button {
+  &:focus,
+  &:focus-visible {
+    outline: none !important;
+  }
+
+  &.mat-primary {
+    background: var(--button-bg, var(--primary-color)) !important;
+    color: var(--button-text-color, white) !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background: var(--primary-600, #8a56ac) !important;
+      color: var(--button-text-color, white) !important;
+    }
+  }
+}
+
+/* Specific fix for Add to Cart buttons */
+.add-to-cart-btn,
+button[aria-label*="Add to cart"],
+button[title*="Add to cart"] {
+  background: var(--button-bg, var(--primary-color)) !important;
+  color: var(--button-text-color, white) !important;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
+    background: var(--primary-600, #8a56ac) !important;
+    color: var(--button-text-color, white) !important;
+  }
+
+  &:focus {
+    background: var(--button-bg, var(--primary-color)) !important;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 156, 89, 190), 0.3) !important;
+  }
+}
+
+/* Animation preservation during state changes */
+button,
+.btn {
+  transition: all 0.3s ease !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    transition: all 0.2s ease !important;
+  }
+}
+
+/* Mobile touch state fixes */
+@media (max-width: 768px) {
+  button,
+  .btn {
+    -webkit-tap-highlight-color: rgba(var(--primary-rgb, 156, 89, 190), 0.2) !important;
+
+    &:active {
+      transform: scale(0.98) !important;
+    }
+  }
+}

@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
   }
 
   maxQuantityReached: { [key: number]: boolean } = {};
-  
+
   incrementQuantity(item: CartItem): void {
     if (item.quantity >= this.cartService.MAX_QUANTITY) {
       this.maxQuantityReached[item.id] = true;
@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
       }, 2000);
       return;
     }
-    
+
     const success = this.cartService.updateQuantity(item.id, item.quantity + 1);
     if (!success) {
       this.maxQuantityReached[item.id] = true;
@@ -97,9 +97,33 @@ export class CartComponent implements OnInit {
   continueShopping(): void {
     this.router.navigate(['/home']);
   }
-  
+
   handleImageError(event: any): void {
     // Use asset service to handle the error and get a placeholder image
     this.assetService.handleImageError(event);
+  }
+
+  public getProductTypeInitial(productName: string): string {
+    const name = productName.toLowerCase();
+    if (name.includes('birthday')) return 'B';
+    if (name.includes('anniversary')) return 'A';
+    if (name.includes('wedding')) return 'W';
+    if (name.includes('farewell')) return 'F';
+    if (name.includes('valentine')) return 'V';
+    if (name.includes('christmas')) return 'C';
+    if (name.includes('new year')) return 'N';
+    return 'G'; // Default for Gift
+  }
+
+  public getProductType(productName: string): string {
+    const name = productName.toLowerCase();
+    if (name.includes('birthday')) return 'birthday';
+    if (name.includes('anniversary')) return 'anniversary';
+    if (name.includes('wedding')) return 'wedding';
+    if (name.includes('farewell')) return 'farewell';
+    if (name.includes('valentine')) return 'valentine';
+    if (name.includes('christmas')) return 'christmas';
+    if (name.includes('new year')) return 'newyear';
+    return 'default';
   }
 }

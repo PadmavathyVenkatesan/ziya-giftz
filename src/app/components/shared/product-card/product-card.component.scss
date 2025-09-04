@@ -215,17 +215,47 @@
       width: 100%;
       padding: 12px;
       border: none;
-      background-color: var(--primary-500, #9c59be); /* Theme-aware primary color */
-      color: var(--primary-contrast, white); /* Theme-aware contrast color */
+      background-color: var(--primary-500, #9c59be) !important; /* Theme-aware primary color */
+      color: var(--primary-contrast, white) !important; /* Theme-aware contrast color */
       border-radius: 8px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.3s;
       letter-spacing: 0.5px;
+      outline: none !important; /* Remove default focus outline */
 
       &:hover {
-        background-color: var(--primary-600, #8a56ac); /* Theme-aware hover color */
+        background-color: var(--primary-600, #8a56ac) !important; /* Theme-aware hover color */
         transform: translateY(-1px);
+      }
+
+      &:focus,
+      &:focus-visible {
+        background-color: var(--primary-500, #9c59be) !important;
+        color: var(--primary-contrast, white) !important;
+        outline: 2px solid var(--primary-300, rgba(156, 89, 190, 0.3)) !important;
+        outline-offset: 2px;
+        box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 156, 89, 190), 0.2) !important;
+      }
+
+      &:active {
+        background-color: var(--primary-700, #7a4c96) !important;
+        color: var(--primary-contrast, white) !important;
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(var(--primary-rgb, 156, 89, 190), 0.3) !important;
+      }
+
+      &:visited {
+        background-color: var(--primary-500, #9c59be) !important;
+        color: var(--primary-contrast, white) !important;
+      }
+
+      /* Ensure theme colors persist in all states */
+      &:hover:focus,
+      &:hover:active,
+      &:focus:active {
+        background-color: var(--primary-600, #8a56ac) !important;
+        color: var(--primary-contrast, white) !important;
       }
     }
 
@@ -243,8 +273,8 @@
         width: 40px;
         height: 40px;
         border: none;
-        background-color: var(--primary-500, #9c59be); /* Theme-aware primary color */
-        color: var(--primary-contrast, white); /* Theme-aware contrast color */
+        background-color: var(--primary-500, #9c59be) !important; /* Theme-aware primary color */
+        color: var(--primary-contrast, white) !important; /* Theme-aware contrast color */
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
@@ -252,9 +282,27 @@
         align-items: center;
         justify-content: center;
         transition: all 0.2s ease;
+        outline: none !important;
 
         &:hover {
-          background-color: var(--primary-600, #8a56ac); /* Theme-aware hover color */
+          background-color: var(--primary-600, #8a56ac) !important; /* Theme-aware hover color */
+        }
+
+        &:focus,
+        &:focus-visible {
+          background-color: var(--primary-500, #9c59be) !important;
+          color: var(--primary-contrast, white) !important;
+          box-shadow: 0 0 0 2px rgba(var(--primary-rgb, 156, 89, 190), 0.3) !important;
+        }
+
+        &:active {
+          background-color: var(--primary-700, #7a4c96) !important;
+          color: var(--primary-contrast, white) !important;
+        }
+
+        &:visited {
+          background-color: var(--primary-500, #9c59be) !important;
+          color: var(--primary-contrast, white) !important;
         }        &.minus {
           border-radius: 8px 0 0 8px;
         }

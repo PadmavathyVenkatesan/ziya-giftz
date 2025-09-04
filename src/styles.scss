@@ -1,0 +1,108 @@
+/* Import theme variables and components */
+@use 'styles/themes.scss';
+@use 'styles/button-fixes.scss';
+@use 'styles/global-button-theme.scss';
+
+/* Add any global styles here */
+
+/* Debug for wishlist badge text visibility */
+.wishlist-badge {
+  * {
+    color: white !important;
+    font-weight: bold !important;
+    display: inline !important;
+    visibility: visible !important;
+  }
+}
+
+/* Global SVG visibility */
+svg {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  &[width], &[height] {
+    width: attr(width) !important;
+    height: attr(height) !important;
+  }
+}
+
+/* Floating Theme Button Force Visibility - Updated for Stack Layout */
+app-floating-theme-button {
+  display: block !important;
+  position: relative !important; /* Changed from fixed */
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  .professional-theme-switcher {
+    display: block !important;
+    position: relative !important; /* Changed from fixed */
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .theme-toggle-btn {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: #6C63FF !important;
+    border-radius: 50% !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3) !important;
+  }
+
+  svg {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    fill: currentColor !important;
+  }
+}
+
+/* Search and Navigation Icon Fixes */
+.search-btn svg,
+.wishlist-icon svg,
+.top-navbar svg {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  stroke: currentColor !important;
+  fill: none !important;
+}
+
+/* Ensure buttons with icons are visible */
+button svg,
+a svg {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Material Icon fallbacks */
+mat-icon {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-family: 'Material Icons' !important;
+}
+
+/* Wishlist Badge Number Visibility */
+.wishlist-badge {
+  color: white !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+  line-height: 1 !important;
+
+  // Ensure the number is always visible
+  span, div, text {
+    color: white !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+  }
+}

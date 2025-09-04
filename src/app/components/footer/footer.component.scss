@@ -1,0 +1,354 @@
+// Footer styles for full-width layout
+.footer-wrapper {
+  width: 100%;
+  margin: 0;
+  min-height: auto;
+}
+
+// Add padding to accordion content for better spacing
+.accordion {
+  max-width: none;
+
+  .accordion-item {
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+
+  .accordion-button {
+    padding: 1rem 1.5rem;
+
+    @media (max-width: 768px) {
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  .accordion-body {
+    padding: 1.5rem;
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+    }
+  }
+}
+
+// Copyright section styles
+.border-top {
+  border-color: #dee2e6 !important;
+  margin-top: 2rem !important;
+  padding-top: 1.5rem !important;
+}
+
+.text-center {
+  padding: 0 1rem;
+
+  .row {
+    margin: 0;
+  }
+
+  .col-md-6 {
+    padding: 0.5rem;
+  }
+
+  p {
+    margin-bottom: 0.5rem !important;
+    font-size: 0.875rem;
+
+    @media (max-width: 768px) {
+      text-align: center !important;
+      margin-bottom: 0.25rem !important;
+    }
+  }
+}
+
+// Ensure copyright section is always visible
+.mt-5 {
+  margin-top: 2rem !important;
+
+  @media (max-width: 768px) {
+    margin-top: 1.5rem !important;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 576px) {
+  .footer-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .text-center .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* Delivery Cards Spacing Control Only */
+.accordion-body .row {
+  .col-md-6 {
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .card {
+    margin-bottom: 0;
+
+    .card-body {
+      padding: 1.75rem 1.5rem;
+
+      @media (max-width: 768px) {
+        padding: 1.25rem 1rem;
+      }
+    }
+  }
+}
+
+// Delivery card icon styles
+.delivery-icon-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+
+  .delivery-main-icon {
+    width: 64px;
+    height: 64px;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+  }
+
+  .delivery-location-icon {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    padding: 2px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+    animation: pulse 2s infinite;
+  }
+
+  &:hover {
+    .delivery-main-icon {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    .delivery-location-icon {
+      animation: bounce 0.6s ease-in-out;
+    }
+  }
+
+  // Fallback for FontAwesome icons
+  .display-4 {
+    font-size: 3rem;
+    opacity: 0.9;
+  }
+
+  .position-absolute {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 0.3rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+// Icon animations
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+// Enhanced delivery card styles
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-body {
+    h5 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+
+      i {
+        opacity: 0.8;
+      }
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      i {
+        font-size: 1.8rem;
+        opacity: 0.8;
+      }
+    }
+
+    small {
+      font-size: 0.85rem;
+      opacity: 0.9;
+
+      i {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+// Background gradient enhancements
+.bg-primary {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+}
+
+.bg-success {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%) !important;
+}
+
+// Mobile optimizations for delivery cards
+@media (max-width: 768px) {
+  .delivery-icon-container {
+    .display-4 {
+      font-size: 2.5rem;
+    }
+
+    .position-absolute {
+      font-size: 1rem;
+      padding: 0.2rem;
+    }
+  }
+
+  .card .card-body {
+    h2 {
+      font-size: 2rem;
+
+      i {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+// Fix alert-info visibility
+.alert-info {
+  background-color: #d1ecf1 !important;
+  border-color: #bee5eb !important;
+  color: #0c5460 !important;
+
+  h6, ul li {
+    color: #0c5460 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  &:hover {
+    background-color: #bee5eb !important;
+  }
+}
+
+// Enhanced SVG Icon Styles
+.card-body {
+  h5 svg, h2 svg, small svg {
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+
+  h5 svg {
+    opacity: 0.9;
+
+    &:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  h2 svg {
+    opacity: 0.9;
+
+    &:hover {
+      transform: rotate(360deg);
+      opacity: 1;
+    }
+  }
+
+  small svg {
+    opacity: 0.8;
+
+    &:hover {
+      transform: translateY(-1px);
+      opacity: 1;
+    }
+  }
+}
+
+// Enhanced delivery card responsiveness
+@media (max-width: 768px) {
+  .delivery-icon-container {
+    margin-bottom: 0.75rem;
+
+    .delivery-main-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .delivery-location-icon {
+      width: 20px;
+      height: 20px;
+      top: -6px;
+      right: -8px;
+    }
+  }
+
+  .card .card-body {
+    h2 {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    h5 svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

@@ -1,0 +1,196 @@
+/* Global Button Theme Integration - Comprehensive button styling for all components */
+
+/* Reset and base styles for all buttons */
+button,
+.btn,
+[role="button"],
+.submit-button,
+.continue-button,
+.place-order-btn,
+.address-btn,
+.saved-info-badge {
+  /* Apply theme-aware primary button styling */
+  background: var(--primary-color, #6C63FF) !important;
+  color: var(--primary-contrast, white) !important;
+  border: 2px solid var(--primary-color, #6C63FF) !important;
+  outline: none !important;
+  transition: all 0.3s ease !important;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none !important;
+
+  /* Hover state */
+  &:hover {
+    background: var(--primary-600, #5b54e6) !important;
+    color: var(--primary-contrast, white) !important;
+    border-color: var(--primary-600, #5b54e6) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--primary-rgb, 108, 99, 255), 0.4) !important;
+  }
+
+  /* Active state */
+  &:active {
+    background: var(--primary-700, #4c46cc) !important;
+    color: var(--primary-contrast, white) !important;
+    border-color: var(--primary-700, #4c46cc) !important;
+    transform: translateY(0);
+  }
+
+  /* Focus state */
+  &:focus,
+  &:focus-visible,
+  &:focus-within {
+    background: var(--primary-color, #6C63FF) !important;
+    color: var(--primary-contrast, white) !important;
+    border-color: var(--primary-color, #6C63FF) !important;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 108, 99, 255), 0.3) !important;
+    outline: none !important;
+  }
+
+  /* Visited state */
+  &:visited {
+    background: var(--primary-color, #6C63FF) !important;
+    color: var(--primary-contrast, white) !important;
+    border-color: var(--primary-color, #6C63FF) !important;
+    text-decoration: none !important;
+  }
+
+  /* Disabled state */
+  &:disabled {
+    background: var(--muted, #9ca3af) !important;
+    color: var(--muted-contrast, #6b7280) !important;
+    border-color: var(--muted, #9ca3af) !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Secondary button styles */
+.btn-secondary,
+.btn-outline-primary,
+.cancel-btn,
+button[class*="cancel"],
+button[class*="outline"] {
+  background: transparent !important;
+  color: var(--primary-color, #6C63FF) !important;
+  border: 2px solid var(--primary-color, #6C63FF) !important;
+
+  &:hover {
+    background: var(--primary-color, #6C63FF) !important;
+    color: var(--primary-contrast, white) !important;
+    border-color: var(--primary-color, #6C63FF) !important;
+  }
+
+  &:active {
+    background: var(--primary-600, #5b54e6) !important;
+    color: var(--primary-contrast, white) !important;
+    border-color: var(--primary-600, #5b54e6) !important;
+  }
+
+  &:focus {
+    background: transparent !important;
+    color: var(--primary-color, #6C63FF) !important;
+    border-color: var(--primary-color, #6C63FF) !important;
+  }
+}
+
+/* Success button styles */
+.btn-success,
+.success-btn {
+  background: var(--success, #10b981) !important;
+  color: var(--success-contrast, white) !important;
+  border-color: var(--success, #10b981) !important;
+
+  &:hover {
+    background: var(--success-600, #059669) !important;
+    border-color: var(--success-600, #059669) !important;
+  }
+
+  &:active {
+    background: var(--success-700, #047857) !important;
+    border-color: var(--success-700, #047857) !important;
+  }
+}
+
+/* Danger button styles */
+.btn-danger,
+.danger-btn,
+.delete-btn,
+button[class*="delete"],
+button[class*="danger"] {
+  background: var(--error, #ef4444) !important;
+  color: var(--error-contrast, white) !important;
+  border-color: var(--error, #ef4444) !important;
+
+  &:hover {
+    background: var(--error-600, #dc2626) !important;
+    border-color: var(--error-600, #dc2626) !important;
+  }
+
+  &:active {
+    background: var(--error-700, #b91c1c) !important;
+    border-color: var(--error-700, #b91c1c) !important;
+  }
+}
+
+/* Icon button styles */
+.mat-mdc-icon-button,
+.btn-icon,
+button[class*="icon"] {
+  background: transparent !important;
+  color: var(--text, #333) !important;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 40px;
+  height: 40px;
+  padding: 0 !important;
+
+  &:hover {
+    background: rgba(var(--primary-rgb, 108, 99, 255), 0.1) !important;
+    color: var(--primary-color, #6C63FF) !important;
+  }
+
+  &:active {
+    background: rgba(var(--primary-rgb, 108, 99, 255), 0.2) !important;
+    transform: scale(0.95);
+  }
+}
+
+/* Theme-specific adjustments */
+[data-theme="dark"] {
+  .btn-secondary,
+  .btn-outline-primary,
+  .cancel-btn {
+    &:hover {
+      color: var(--bg, #121212) !important;
+    }
+  }
+}
+
+[data-theme="minimal"] {
+  button,
+  .btn {
+    border-radius: 4px !important;
+    
+    &:hover {
+      transform: none !important;
+      box-shadow: 0 2px 8px rgba(var(--primary-rgb, 75, 85, 99), 0.2) !important;
+    }
+  }
+}
+
+[data-theme="colorful"] {
+  button,
+  .btn {
+    border-radius: 16px !important;
+    
+    &:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 25px rgba(var(--primary-rgb, 236, 72, 153), 0.5) !important;
+    }
+  }
+}

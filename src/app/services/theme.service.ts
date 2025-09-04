@@ -70,10 +70,18 @@ export class ThemeService {
   private initializeTheme(): void {
     const savedTheme = localStorage.getItem('app-theme') as Theme;
 
+    // Define the preferred default theme here - change this to your preferred theme
+    const preferredDefaultTheme: Theme = 'default'; // Options: 'default', 'dark', 'minimal', 'colorful'
+
+    console.log('🎨 Initializing theme system...');
+    console.log('Saved theme from localStorage:', savedTheme);
+
     if (savedTheme && this.isValidTheme(savedTheme)) {
+      console.log('✅ Loading saved theme:', savedTheme);
       this.applyTheme(savedTheme, false);
     } else {
-      this.applyTheme('default', false);
+      console.log('🎨 No saved theme found, applying default theme:', preferredDefaultTheme);
+      this.applyTheme(preferredDefaultTheme, false);
     }
   }
 
@@ -123,31 +131,6 @@ export class ThemeService {
     this.setTheme(themes[nextIndex]);
   }
 
-  /**
-   * Test all themes with delays
-   */
-  testAllThemes(): void {
-    const themes: Theme[] = ['default', 'dark', 'minimal', 'colorful'];
-    let index = 0;
-
-    console.log('🧪 Testing all themes...');
-
-    const testNext = () => {
-      if (index < themes.length) {
-        const theme = themes[index];
-        console.log(`🧪 Testing theme ${index + 1}/4: ${theme}`);
-        this.setTheme(theme);
-        index++;
-        setTimeout(testNext, 2000);
-      } else {
-        console.log('🧪 Theme testing complete!');
-        // Return to default
-        setTimeout(() => this.setTheme('default'), 1000);
-      }
-    };
-
-    testNext();
-  }
 
   /**
    * Apply theme to DOM and update state
@@ -239,14 +222,14 @@ export class ThemeService {
         buttonColor: '#111827'
       },
       'colorful': {
-        bodyBg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        bodyColor: '#ffffff',
+        bodyBg: 'linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%)',
+        bodyColor: '#111827',
         cardBg: 'rgba(255, 255, 255, 0.9)',
         cardColor: '#1F2937',
-        navBg: 'linear-gradient(90deg, #FF6B6B, #4ECDC4)',
-        navColor: '#ffffff',
-        buttonBg: 'linear-gradient(45deg, #FF6B6B, #4ECDC4)',
-        buttonColor: '#ffffff'
+        navBg: 'linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%)',
+        navColor: '#111827',
+        buttonBg: 'linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%)',
+        buttonColor: '#111827'
       }
     };
 

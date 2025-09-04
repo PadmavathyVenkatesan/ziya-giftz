@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,7 +23,8 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private wishlistService: WishlistService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
   ) {
     // Set up search with debounce
     this.searchControl.valueChanges
@@ -39,18 +40,40 @@ export class TopNavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('🔄 TopNavbar ngOnInit - initializing');
+
     // Subscribe to wishlist changes
     this.wishlistSubscription = this.wishlistService.wishlistItems$.subscribe(items => {
+      console.log('🛍️ Wishlist items received:', items);
+      console.log('🔢 Setting wishlistItemCount to:', items.length);
       this.wishlistItemCount = items.length;
+
+      // Force change detection
+      this.cdr.detectChanges();
+      console.log('🔄 Change detection triggered');
     });
+
+    // Get initial count
+    const initialCount = this.wishlistService.getWishlistItemCount();
+    console.log('🔢 Initial wishlist count:', initialCount);
+    this.wishlistItemCount = initialCount;
+
+    // Check localStorage for debugging
+    const savedWishlist = localStorage.getItem('wishlist');
+    console.log('💾 localStorage wishlist:', savedWishlist);
 
     // If user is logged in, fetch wishlist from server
     if (this.authService.isAuthenticated()) {
-      this.wishlistService.fetchWishlistFromServer().subscribe();
+      this.wishlistService.fetchWishlistFromServer().subscribe({
+        next: (response) => {
+          console.log('✅ Wishlist synced from server');
+        },
+        error: (error) => {
+          console.warn('❌ Could not sync wishlist from server, using local data');
+        }
+      });
     }
-  }
-
-  ngOnDestroy(): void {
+  }  ngOnDestroy(): void {
     // Clean up subscription
     if (this.wishlistSubscription) {
       this.wishlistSubscription.unsubscribe();

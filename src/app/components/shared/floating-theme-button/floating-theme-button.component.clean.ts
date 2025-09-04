@@ -56,23 +56,7 @@ import { Subscription } from 'rxjs';
           </div>
         </div>
 
-        <div class="theme-panel-actions">
-          <button
-            class="action-btn test-btn"
-            (click)="testAllThemes()"
-            title="Test all themes">
-            <mat-icon>science</mat-icon>
-            <span>Test All</span>
-          </button>
 
-          <button
-            class="action-btn refresh-btn"
-            (click)="refreshTheme()"
-            title="Refresh current theme">
-            <mat-icon>refresh</mat-icon>
-            <span>Refresh</span>
-          </button>
-        </div>
       </div>
 
       <!-- Backdrop -->
@@ -92,8 +76,6 @@ import { Subscription } from 'rxjs';
     }
 
     .theme-toggle-btn {
-      width: 56px;
-      height: 56px;
       border-radius: 50%;
       background: var(--color-primary);
       border: none;

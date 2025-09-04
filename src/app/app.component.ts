@@ -41,13 +41,18 @@ export class AppComponent implements OnInit {
     // IMMEDIATE CSS TEXT CLEANUP
     this.hideCSSTxtImmediately();
 
-    // Initialize theme service (this will load saved theme)
-    console.log('🚀 App initialized - theme service loaded');
-    console.log('🎨 Current theme:', this.themeService.getCurrentTheme());
+    // Ensure theme is loaded immediately on app initialization
+    console.log('🚀 App initialized - ensuring theme is loaded');
+
+    // Force theme initialization if not already done
+    const currentTheme = this.themeService.getCurrentTheme();
+    console.log('🎨 Current theme:', currentTheme);
+
+    // Apply the current theme to ensure it's properly loaded
+    this.themeService.setTheme(currentTheme);
 
     // Expose theme service globally for easy testing
     (window as any).themeService = this.themeService;
-    (window as any).testThemes = () => this.themeService.testAllThemes();
     (window as any).toggleTheme = () => this.themeService.toggleTheme();
 
     // Enhanced theme debugging utilities
@@ -90,7 +95,7 @@ export class AppComponent implements OnInit {
     // ULTIMATE THEME FORCE APPLICATION
     (window as any).ultimateThemeForce = (themeName: string) => {
       console.log('🚀 ULTIMATE THEME FORCE:', themeName);
-      
+
       const themes: any = {
         'default': {
           bodyBg: '#ffffff',
@@ -123,14 +128,14 @@ export class AppComponent implements OnInit {
           buttonColor: '#111827'
         },
         'colorful': {
-          bodyBg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          bodyColor: '#ffffff',
+          bodyBg: 'linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%)',
+          bodyColor: '#111827',
           cardBg: 'rgba(255, 255, 255, 0.9)',
           cardColor: '#1F2937',
-          navBg: 'linear-gradient(90deg, #FF6B6B, #4ECDC4)',
-          navColor: '#ffffff',
-          buttonBg: 'linear-gradient(45deg, #FF6B6B, #4ECDC4)',
-          buttonColor: '#ffffff'
+          navBg: 'linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%)',
+          navColor: '#111827',
+          buttonBg: 'linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%)',
+          buttonColor: '#111827'
         }
       };
 
@@ -158,14 +163,14 @@ export class AppComponent implements OnInit {
 
       allElements.forEach((element: Element) => {
         const el = element as HTMLElement;
-        
+
         // Skip debug panel
         if (el.closest('.debug-panel') || el.style.position === 'fixed' && el.style.top === '10px') {
           return;
         }
 
         // Apply to main containers
-        if (el.classList.contains('app-container') || 
+        if (el.classList.contains('app-container') ||
             el.classList.contains('main-content') ||
             el.classList.contains('container')) {
           el.style.setProperty('background', theme.bodyBg, 'important');
@@ -211,8 +216,8 @@ export class AppComponent implements OnInit {
         }
 
         // Apply to general divs and sections
-        if ((el.tagName === 'DIV' || el.tagName === 'SECTION') && 
-            !el.style.position && 
+        if ((el.tagName === 'DIV' || el.tagName === 'SECTION') &&
+            !el.style.position &&
             !el.className.includes('debug')) {
           el.style.setProperty('color', theme.bodyColor, 'important');
           appliedCount++;
@@ -221,7 +226,7 @@ export class AppComponent implements OnInit {
 
       console.log(`✅ Applied theme to ${appliedCount} elements`);
       console.log('🎨 Theme applied:', themeName);
-      
+
       // Trigger a reflow
       document.body.offsetHeight;
     };

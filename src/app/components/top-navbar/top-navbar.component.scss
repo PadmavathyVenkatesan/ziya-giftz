@@ -38,59 +38,114 @@
 
     input {
       width: 100%;
-      padding: 6px 12px;
-      border: 1px solid var(--border) !important;
-      background-color: var(--card-bg) !important;
+      padding: 8px 45px 8px 16px;
+      border: 2px solid #e2e8f0 !important;
+      background-color: #f8fafc !important;
       color: var(--text) !important;
-      border-radius: 20px;
-      font-size: 13px;
+      border-radius: 25px;
+      font-size: 14px;
       outline: none;
-      min-height: 32px;
+      min-height: 38px;
       box-sizing: border-box;
+      transition: all 0.3s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
       &:focus {
         border-color: var(--primary-color) !important;
-        box-shadow: 0 0 0 2px var(--primary-light) !important;
+        background-color: white !important;
+        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+        transform: translateY(-1px);
+      }
+
+      &:hover {
+        border-color: #cbd5e1 !important;
+        background-color: white !important;
       }
 
       &::placeholder {
-        color: var(--text-secondary) !important;
+        color: #64748b !important;
+        font-weight: 400;
       }
     }
 
     .search-btn {
       position: absolute;
-      right: 4px;
+      right: 6px;
       top: 50%;
       transform: translateY(-50%);
-      background: none;
+      background: var(--primary-color, #6c63ff) !important;
       border: none;
-      color: var(--text-secondary);
+      color: white !important;
       cursor: pointer;
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      display: flex;
+      display: flex !important;
       align-items: center;
       justify-content: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(108, 99, 255, 0.2);
+      z-index: 10;
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: #5b52d9 !important;
+        transform: translateY(-50%) scale(1.05);
+        box-shadow: 0 4px 8px rgba(108, 99, 255, 0.3);
       }
 
+      &:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
+      svg {
+        width: 18px !important;
+        height: 18px !important;
+        color: white !important;
+        stroke: white !important;
+        fill: none !important;
+        stroke-width: 2 !important;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: none !important;
+      }
+
+      // Fallback for Material Icons
       mat-icon {
-        font-size: 20px;
+        font-size: 18px !important;
+        color: white !important;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: none !important;
+      }
+
+      // Additional fallback with text content
+      &::after {
+        content: "🔍" !important;
+        font-size: 14px !important;
+        color: white !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        display: block !important;
+        z-index: 1 !important;
+      }
+
+      // Hide fallback when SVG is visible
+      svg + * {
+        display: none !important;
       }
     }
   }
 
-  /* Wishlist Icon */
   .wishlist-icon {
     position: relative;
     margin-left: 6px;
     width: 36px;
     height: 36px;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -102,32 +157,115 @@
       background-color: rgba(0, 0, 0, 0.05);
     }
 
+    .wishlist-icon-container {
+      position: relative;
+      display: inline-block;
+
+      .wishlist-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #ff3d71;
+        color: white;
+        font-size: 10px;
+        min-width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        padding: 0 4px;
+        z-index: 10;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        border: 1px solid white;
+
+        &.debug-visible {
+          background-color: #ff3d71 !important;
+          color: white !important;
+          font-size: 10px !important;
+          min-width: 16px !important;
+          height: 16px !important;
+          z-index: 10 !important;
+          border: 1px solid white !important;
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+      }
+    }
+
+    svg {
+      color: var(--primary-color, #6c63ff) !important;
+      width: 20px !important;
+      height: 20px !important;
+      stroke: var(--primary-color, #6c63ff) !important;
+      fill: none !important;
+      stroke-width: 2 !important;
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: none !important;
+    }
+
+    // Fallback for Material Icons
     mat-icon {
-      color: var(--primary-color);
+      color: var(--primary-color, #6c63ff) !important;
       font-size: 20px !important;
       width: 20px !important;
       height: 20px !important;
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: none !important;
     }
 
-    .wishlist-badge {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background-color: var(--primary-color);
-      color: white;
-      font-size: 10px;
-      font-weight: bold;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    // Additional fallback with text content
+    &::before {
+      content: "♡" !important;
+      font-size: 16px !important;
+      color: var(--primary-color, #6c63ff) !important;
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      display: block !important;
+      z-index: 1 !important;
+    }
+
+    // Hide fallback when SVG is visible
+    svg + * {
+      display: none !important;
+    }
+
+    // Animation for badge appearance
+    @keyframes badge-bounce-in {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    // Hover effect for the wishlist icon
+    &:hover {
+      .wishlist-badge {
+        transform: scale(1.1) !important;
+        box-shadow: 0 4px 12px rgba(255, 71, 87, 0.6), 0 6px 20px rgba(255, 71, 87, 0.3) !important;
+      }
     }
   }
+}
 
-  /* Responsive styles */
-  @media (max-width: 480px) {
+/* Responsive styles */
+@media (max-width: 480px) {
+  .top-navbar {
     padding: 6px 8px;
     min-height: 52px;
 
@@ -144,14 +282,24 @@
       max-width: none;
 
       input {
-        font-size: 12px;
-        padding: 5px 10px;
-        min-height: 28px;
+        font-size: 13px;
+        padding: 6px 36px 6px 12px;
+        min-height: 32px;
+        border: 2px solid #e2e8f0 !important;
+        background-color: #f8fafc !important;
       }
 
       .search-btn {
         width: 28px;
         height: 28px;
+        right: 4px;
+        background: var(--primary-color);
+        color: white;
+
+        svg {
+          width: 16px !important;
+          height: 16px !important;
+        }
 
         mat-icon {
           font-size: 16px;
@@ -164,6 +312,11 @@
       height: 32px;
       margin-left: 4px;
 
+      svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+
       mat-icon {
         font-size: 18px !important;
         width: 18px !important;
@@ -171,8 +324,10 @@
       }
     }
   }
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .top-navbar {
     padding: 10px 16px;
 
     .brand-section {
@@ -188,8 +343,24 @@
       margin: 0 16px;
 
       input {
-        font-size: 14px;
-        padding: 8px 14px;
+        font-size: 15px;
+        padding: 8px 45px 8px 16px;
+        min-height: 40px;
+      }
+
+      .search-btn {
+        width: 34px;
+        height: 34px;
+        right: 6px;
+
+        svg {
+          width: 18px !important;
+          height: 18px !important;
+        }
+
+        mat-icon {
+          font-size: 18px;
+        }
       }
     }
   }

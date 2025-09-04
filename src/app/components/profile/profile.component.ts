@@ -171,6 +171,17 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  cancelPasswordChange(): void {
+    this.showPasswordForm = false;
+    this.passwordChangeError = '';
+    this.passwordChangeSuccess = '';
+    this.passwordForm = {
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    };
+  }
+
   // Address Management Methods
   loadAddresses(): void {
     this.addressService.loadAddresses();
@@ -364,5 +375,70 @@ export class ProfileComponent implements OnInit {
 
   calculateOrderTotal(order: Order): number {
     return order.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+  }
+
+  getLastOrderDate(): Date | null {
+    if (!this.currentUser?.orders || this.currentUser.orders.length === 0) {
+      return null;
+    }
+    const sortedOrders = this.currentUser.orders.sort((a: any, b: any) =>
+      new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime()
+    );
+    return new Date(sortedOrders[0].orderDate);
+  }
+
+  public getStatusIcon(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'pending':
+      case 'processing':
+        return 'fa-clock';
+      case 'confirmed':
+        return 'fa-check-circle';
+      case 'shipped':
+      case 'in transit':
+        return 'fa-truck';
+      case 'delivered':
+        return 'fa-check-double';
+      case 'cancelled':
+        return 'fa-times-circle';
+      default:
+        return 'fa-info-circle';
+    }
+  }
+
+  public getStatusBadgeClass(status: string): string {
+    switch (status.toLowerCase()) {
+      case 'pending':
+      case 'processing':
+        return 'bg-warning text-dark';
+      case 'confirmed':
+        return 'bg-info text-white';
+      case 'shipped':
+      case 'in transit':
+        return 'bg-primary text-white';
+      case 'delivered':
+        return 'bg-success text-white';
+      case 'cancelled':
+        return 'bg-danger text-white';
+      default:
+        return 'bg-secondary text-white';
+    }
+  }
+
+  public getProductTypeInitial(productName: string): string {
+    if (!productName) return '?';
+
+    const name = productName.toLowerCase();
+
+    if (name.includes('plaque') || name.includes('trophy')) return 'P';
+    if (name.includes('mug') || name.includes('cup')) return 'M';
+    if (name.includes('frame') || name.includes('photo')) return 'F';
+    if (name.includes('keychain') || name.includes('key')) return 'K';
+    if (name.includes('bottle') || name.includes('flask')) return 'B';
+    if (name.includes('pen') || name.includes('write')) return 'W';
+    if (name.includes('clock') || name.includes('time')) return 'C';
+    if (name.includes('lamp') || name.includes('light')) return 'L';
+
+    return productName.charAt(0).toUpperCase();
   }
 }

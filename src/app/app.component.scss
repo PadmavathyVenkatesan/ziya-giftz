@@ -1,3 +1,4 @@
+/* Floating Buttons Container - Professional Layout */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -8,10 +9,151 @@
   transition: all 0.3s ease;
 }
 
-/* Theme Button - Simple Circle Design */
-app-floating-theme-button .floating-theme-btn {
-  background: var(--navbar-background) !important;
-  color: var(--text-inverse) !important;
+/* Floating Buttons Stack - Right Side */
+.floating-buttons-stack {
+  position: fixed;
+  right: 24px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 10000;
+  pointer-events: none;
+
+  & > * {
+    pointer-events: auto;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Individual button animations */
+  app-floating-theme-button,
+  .contact-floating-button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    right: 16px;
+    bottom: 80px;
+    gap: 12px;
+
+    app-floating-theme-button,
+    .contact-floating-button {
+      width: 48px;
+      height: 48px;
+    }
+  }
+}
+
+/* Floating button entrance animation */
+@keyframes floating-button-entrance {
+  0% {
+    opacity: 0;
+    transform: translateX(100px) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-10px) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Enhanced floating effect */
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.floating-buttons-stack > * {
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+.floating-buttons-stack app-floating-theme-button {
+  animation-delay: 0s;
+}
+
+.floating-buttons-stack .contact-floating-button {
+  animation-delay: 1.5s;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .floating-buttons-stack {
+    right: 16px;
+    bottom: 70px;
+    gap: 12px;
+
+    app-floating-theme-button,
+    .contact-floating-button {
+      button {
+        width: 48px !important;
+        height: 48px !important;
+
+        i, svg {
+          width: 20px !important;
+          height: 20px !important;
+          font-size: 20px !important;
+        }
+      }
+    }
+  }
+
+  /* Reduce hover effects on mobile */
+  .floating-buttons-stack:hover > * {
+    transform: none;
+  }
+
+  .floating-buttons-stack app-floating-theme-button:hover,
+  .floating-buttons-stack .contact-floating-button:hover {
+    transform: scale(1.02);
+  }
+}
+
+/* Small screen adjustments */
+@media (max-width: 480px) {
+  .floating-buttons-stack {
+    right: 12px;
+    bottom: 60px;
+    gap: 10px;
+
+    app-floating-theme-button,
+    .contact-floating-button {
+      button {
+        width: 44px !important;
+        height: 44px !important;
+
+        i, svg {
+          width: 18px !important;
+          height: 18px !important;
+          font-size: 18px !important;
+        }
+      }
+    }
+  }
+}
+
+/* Theme Button - Updated for new component */
+app-floating-theme-button .theme-toggle-btn {
+  background: #6C63FF !important;
+  color: white !important;
   border: none !important;
   border-radius: 50% !important;
   width: 56px !important;
@@ -21,34 +163,64 @@ app-floating-theme-button .floating-theme-btn {
   justify-content: center !important;
   cursor: pointer !important;
   transition: all 0.3s ease !important;
-  box-shadow: 0 8px 25px var(--primary-shadow) !important;
+  box-shadow: 0 8px 25px rgba(108, 99, 255, 0.3) !important;
   outline: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  gap: 0 !important;
-  font-size: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-app-floating-theme-button .floating-theme-btn:hover {
+app-floating-theme-button .theme-toggle-btn:hover {
   transform: translateY(-2px) scale(1.05) !important;
-  box-shadow: 0 12px 35px var(--primary-shadow) !important;
-  background: var(--navbar-background) !important;
+  box-shadow: 0 12px 35px rgba(108, 99, 255, 0.4) !important;
+  background: #5b52d9 !important;
 }
 
-app-floating-theme-button .theme-icon {
-  font-size: 24px !important;
-  width: 24px !important;
-  height: 24px !important;
-  color: var(--text-inverse) !important;
-  margin: 0 !important;
-  padding: 0 !important;
+app-floating-theme-button .theme-icon-svg {
+  width: 32px !important;
+  height: 32px !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  fill: white !important;
+  stroke: white !important;
+  margin: 0 auto !important;
+  flex-shrink: 0 !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
+  overflow: visible !important;
 }
 
-app-floating-theme-button .theme-text {
-  display: none !important;
+/* Make sure all SVG elements inside theme button are visible */
+app-floating-theme-button .theme-icon-svg * {
+  fill: white !important;
+  stroke: white !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Specific styling for circles and paths in the palette icon */
+app-floating-theme-button .theme-icon-svg circle {
+  opacity: 1 !important;
+  stroke-width: 1 !important;
+}
+
+app-floating-theme-button .theme-icon-svg ellipse {
+  opacity: 1 !important;
+  stroke-width: 2 !important;
 }
 
 /* WhatsApp Button - Clean Design */
+.contact-floating-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+}
+
 .contact-floating-button button {
   background: linear-gradient(135deg, #25d366 0%, #20c55a 100%) !important;
   width: 56px !important;
@@ -56,12 +228,20 @@ app-floating-theme-button .theme-text {
   border-radius: 50% !important;
   border: none !important;
   outline: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
   position: relative !important;
 }
 
-.contact-floating-button button::before,
-.contact-floating-button button::after {
-  display: none !important;
+.contact-floating-button button i {
+  font-size: 28px !important;
+  color: white !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .contact-floating-button span {
@@ -148,15 +328,12 @@ app-floating-theme-button .theme-text {
   z-index: 0; /* Place footer below content in z-index stack */
 }
 
-/* WhatsApp Contact Button */
+/* WhatsApp Contact Button - Updated for Stack Layout */
 .contact-floating-button {
-  position: fixed !important;
-  bottom: 70px !important;
-  right: 20px !important;
+  position: relative !important; /* Changed from fixed */
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  z-index: 10000 !important; /* Higher z-index than navbar */
   text-decoration: none !important;
   pointer-events: auto !important;
   visibility: visible !important;
@@ -286,7 +463,7 @@ body *:contains("background: #FF0000 !important; } .whatsapp-icon"),
 
 /* Force floating theme button to be visible */
 app-floating-theme-button,
-app-floating-theme-button .floating-theme-container {
+app-floating-theme-button .professional-theme-switcher {
   position: fixed !important;
   bottom: 140px !important;
   right: 20px !important;
@@ -298,33 +475,36 @@ app-floating-theme-button .floating-theme-container {
 }
 
 /* Enhanced theme button styling */
-app-floating-theme-button .floating-theme-btn {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+app-floating-theme-button .theme-toggle-btn {
+  background: linear-gradient(135deg, #6C63FF, #5b52d9) !important;
   color: white !important;
   border: none !important;
-  border-radius: 50px !important;
-  padding: 12px 16px !important;
+  border-radius: 50% !important;
+  width: 56px !important;
+  height: 56px !important;
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
-  font-size: 14px !important;
-  box-shadow: 0 8px 25px var(--primary-shadow) !important;
+  justify-content: center !important;
+  box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4) !important;
   transition: all 0.3s ease !important;
   cursor: pointer !important;
-  backdrop-filter: blur(20px) !important;
-  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-app-floating-theme-button .floating-theme-btn:hover {
+app-floating-theme-button .theme-toggle-btn:hover {
   transform: translateY(-2px) scale(1.05) !important;
-  box-shadow: 0 12px 35px var(--primary-shadow) !important;
+  box-shadow: 0 12px 35px rgba(108, 99, 255, 0.5) !important;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
 }
 
 app-floating-theme-button .theme-icon {
   font-size: 20px !important;
-  width: 20px !important;
-  height: 20px !important;
+  width: auto !important;
+  height: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 app-floating-theme-button .theme-text {

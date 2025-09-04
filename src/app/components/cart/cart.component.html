@@ -12,11 +12,42 @@
 
   <!-- Empty cart state -->
   <div class="cart-empty" *ngIf="!isLoading && cartItems.length === 0">
-    <div class="empty-icon">
-      <span class="material-icons">shopping_cart</span>
+    <div class="empty-illustration">
+      <div class="empty-icon">
+        <span class="material-icons cart-icon">shopping_cart</span>
+        <div class="floating-elements">
+          <div class="floating-item item-1">🛍️</div>
+        </div>
+      </div>
+      <div class="pulsing-circle"></div>
+      <div class="rotating-ring"></div>
     </div>
-    <p>Your cart is empty</p>
-    <button (click)="continueShopping()" class="continue-shopping">Continue Shopping</button>
+
+    <div class="empty-content">
+      <h2 class="empty-title">Your cart is empty</h2>
+      <p class="empty-subtitle">Start adding some amazing products to your cart!</p>
+
+      <div class="empty-features">
+        <div class="feature-item">
+          <span class="feature-icon">🚚</span>
+          <span class="feature-text">Free Delivery</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎁</span>
+          <span class="feature-text">Gift Wrapping</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">⚡</span>
+          <span class="feature-text">Fast Checkout</span>
+        </div>
+      </div>
+
+      <button (click)="continueShopping()" class="continue-shopping">
+        <span class="btn-icon">🛒</span>
+        <span class="btn-text">Start Shopping</span>
+        <div class="btn-ripple"></div>
+      </button>
+    </div>
   </div>
 
   <!-- Cart with items -->
@@ -31,8 +62,11 @@
     <!-- Cart items -->
     <div class="cart-items">
       <div class="cart-item" *ngFor="let item of cartItems">
-        <div class="item-image">
+        <div class="item-image" [attr.data-product-type]="getProductType(item.name)">
           <img [src]="item.image" [alt]="item.name" (error)="handleImageError($event)">
+          <div class="placeholder-content">
+            <span>{{ getProductTypeInitial(item.name) }}</span>
+          </div>
         </div>
 
         <div class="item-details">
